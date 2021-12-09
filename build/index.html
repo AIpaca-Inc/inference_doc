@@ -1,0 +1,844 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>AIbro Documentation</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="source/javascripts/app/_copy.js"></script>
+    <style media="screen">
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cpf {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s, .highlight .sa, .highlight .dl {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf, .highlight .fm {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv, .highlight .vm {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #f92672;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <style media="print">
+      * {
+        -webkit-transition:none!important;
+        transition:none!important;
+      }
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight, .highlight .w {
+  color: #586e75;
+}
+.highlight .err {
+  color: #002b36;
+  background-color: #dc322f;
+}
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cm, .highlight .cpf, .highlight .c1, .highlight .cs {
+  color: #657b83;
+}
+.highlight .cp {
+  color: #b58900;
+}
+.highlight .nt {
+  color: #b58900;
+}
+.highlight .o, .highlight .ow {
+  color: #93a1a1;
+}
+.highlight .p, .highlight .pi {
+  color: #93a1a1;
+}
+.highlight .gi {
+  color: #859900;
+}
+.highlight .gd {
+  color: #dc322f;
+}
+.highlight .gh {
+  color: #268bd2;
+  background-color: #002b36;
+  font-weight: bold;
+}
+.highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
+  color: #6c71c4;
+}
+.highlight .kc {
+  color: #cb4b16;
+}
+.highlight .kt {
+  color: #cb4b16;
+}
+.highlight .kd {
+  color: #cb4b16;
+}
+.highlight .s, .highlight .sb, .highlight .sc, .highlight .dl, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .s1 {
+  color: #859900;
+}
+.highlight .sa {
+  color: #6c71c4;
+}
+.highlight .sr {
+  color: #2aa198;
+}
+.highlight .si {
+  color: #d33682;
+}
+.highlight .se {
+  color: #d33682;
+}
+.highlight .nn {
+  color: #b58900;
+}
+.highlight .nc {
+  color: #b58900;
+}
+.highlight .no {
+  color: #b58900;
+}
+.highlight .na {
+  color: #268bd2;
+}
+.highlight .m, .highlight .mb, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mx {
+  color: #859900;
+}
+.highlight .ss {
+  color: #859900;
+}
+    </style>
+    <link href="stylesheets/screen-1d8a2b99.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print-953e3353.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all-c9c9fd69.js"></script>
+
+    <script>
+      $(function() { setupCodeCopy(); });
+    </script>
+  </head>
+
+  <body class="index" data-languages="[&quot;python&quot;]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar-cad8cdcb.png" alt="" />
+      </span>
+    </a>
+    <div class="toc-wrapper">
+      <img src="images/logo-5db5870f.png" class="logo" alt="" />
+        <div class="lang-selector">
+              <a href="#" data-language-name="python">python</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <ul id="toc" class="toc-list-h1">
+          <li>
+            <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
+          </li>
+          <li>
+            <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#start-the-first-inference-job-on-aibro" class="toc-h2 toc-link" data-title="Start The First Inference Job on AIbro">Start The First Inference Job on AIbro</a>
+                      <ul class="toc-list-h3">
+                          <li>
+                            <a href="#step-1-install" class="toc-h3 toc-link" data-title="Step 1: Install">Step 1: Install</a>
+                          </li>
+                          <li>
+                            <a href="#step-2-prepare-a-formatted-model-repo" class="toc-h3 toc-link" data-title="Step 2: Prepare a formatted model repo">Step 2: Prepare a formatted model repo</a>
+                          </li>
+                          <li>
+                            <a href="#step-3-create-an-inference-api-with-one-line-code" class="toc-h3 toc-link" data-title="Step 3: Create an inference API with one-line code">Step 3: Create an inference API with one-line code</a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li>
+                    <a href="#aibro-inference" class="toc-h2 toc-link" data-title="aibro.Inference">aibro.Inference</a>
+                      <ul class="toc-list-h3">
+                          <li>
+                            <a href="#deploy" class="toc-h3 toc-link" data-title="deploy()">deploy()</a>
+                              <ul class="toc-list-h4">
+                                  <li>
+                                    <a href="#parameters" class="toc-h4 toc-link" data-title="Parameters">Parameters</a>
+                                  </li>
+                              </ul>
+                          </li>
+                          <li>
+                            <a href="#complete" class="toc-h3 toc-link" data-title="complete()">complete()</a>
+                              <ul class="toc-list-h4">
+                                  <li>
+                                    <a href="#parameters-2" class="toc-h4 toc-link" data-title="Parameters">Parameters</a>
+                                  </li>
+                              </ul>
+                          </li>
+                          <li>
+                            <a href="#get-more-saving-by-cooling-instance" class="toc-h3 toc-link" data-title="Get more saving by cooling instance">Get more saving by cooling instance</a>
+                          </li>
+                          <li>
+                            <a href="#inference-job-amp-instance-status" class="toc-h3 toc-link" data-title="Inference Job &amp; Instance Status">Inference Job &amp; Instance Status</a>
+                          </li>
+                      </ul>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#cloud-instance" class="toc-h1 toc-link" data-title="Cloud Instance">Cloud Instance</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#spot-vs-on-demand-instance" class="toc-h2 toc-link" data-title="Spot Vs On-demand Instance">Spot Vs On-demand Instance</a>
+                      <ul class="toc-list-h3">
+                          <li>
+                            <a href="#machine-id" class="toc-h3 toc-link" data-title="Machine id">Machine id</a>
+                          </li>
+                          <li>
+                            <a href="#pricing" class="toc-h3 toc-link" data-title="Pricing">Pricing</a>
+                          </li>
+                          <li>
+                            <a href="#availability" class="toc-h3 toc-link" data-title="Availability">Availability</a>
+                          </li>
+                          <li>
+                            <a href="#reliability" class="toc-h3 toc-link" data-title="Reliability">Reliability</a>
+                          </li>
+                          <li>
+                            <a href="#setup-speed" class="toc-h3 toc-link" data-title="Setup Speed">Setup Speed</a>
+                          </li>
+                      </ul>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#contact-us" class="toc-h1 toc-link" data-title="Contact Us">Contact Us</a>
+          </li>
+          <li>
+            <a href="#data-privacy" class="toc-h1 toc-link" data-title="Data Privacy">Data Privacy</a>
+          </li>
+      </ul>
+        <ul class="toc-footer">
+            <li><a href='https://aipaca.ai'>Sign Up to Get Start</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <!-- ### HTTP Request
+
+`GET http://example.com/api/kittens`
+
+### Query Parameters
+
+| Parameter    | Default | Description                                                                      |
+| ------------ | ------- | -------------------------------------------------------------------------------- |
+| include_cats | false   | If set to true, the result will also include cats.                               |
+| available    | true    | If set to false, the result will include kittens that have already been adopted. | -->
+
+<!-- <aside class="success">
+Remember — a happy kitten is an authenticated kitten!
+</aside>
+
+## Get a Specific Kitten
+
+```ruby
+require 'kittn'
+
+api = Kittn::APIClient.authorize!('meowmeowmeow')
+api.kittens.get(2)
+```
+
+```python
+import kittn
+
+api = kittn.authorize('meowmeowmeow')
+api.kittens.get(2)
+```
+
+```shell
+curl "http://example.com/api/kittens/2" \
+  -H "Authorization: meowmeowmeow"
+```
+
+```javascript
+const kittn = require("kittn");
+
+let api = kittn.authorize("meowmeowmeow");
+let max = api.kittens.get(2);
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "id": 2,
+  "name": "Max",
+  "breed": "unknown",
+  "fluffiness": 5,
+  "cuteness": 10
+}
+```
+
+This endpoint retrieves a specific kitten.
+
+<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+
+### HTTP Request
+
+`GET http://example.com/kittens/<ID>`
+
+### URL Parameters
+
+| Parameter | Description                      |
+| --------- | -------------------------------- |
+| ID        | The ID of the kitten to retrieve |
+
+## Delete a Specific Kitten
+
+```ruby
+require 'kittn'
+
+api = Kittn::APIClient.authorize!('meowmeowmeow')
+api.kittens.delete(2)
+```
+
+```python
+import kittn
+
+api = kittn.authorize('meowmeowmeow')
+api.kittens.delete(2)
+```
+
+```shell
+curl "http://example.com/api/kittens/2" \
+  -X DELETE \
+  -H "Authorization: meowmeowmeow"
+```
+
+```javascript
+const kittn = require("kittn");
+
+let api = kittn.authorize("meowmeowmeow");
+let max = api.kittens.delete(2);
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "id": 2,
+  "deleted": ":("
+}
+```
+
+This endpoint deletes a specific kitten.
+
+### HTTP Request
+
+`DELETE http://example.com/kittens/<ID>`
+
+### URL Parameters
+
+| Parameter | Description                    |
+| --------- | ------------------------------ |
+| ID        | The ID of the kitten to delete | -->
+<h1 id='introduction'>Introduction</h1>
+<p><strong>AIbro Version</strong>: 1.0.0 <span style="color:blue;">(alpha)</span></p>
+
+<p><strong>Last Documentation Update</strong>: Oct. 26, 2021</p>
+
+<p><strong>Definition</strong>: API embedded python library</p>
+
+<p>AIbro is a serverless model training tool that helps data scientists train AI models on cloud platforms with <a href="#step-3-the-magic-one-line-code">one line of code</a>.</p>
+<h1 id='authentication'>Authentication</h1>
+<p>AIbro uses email &amp; password to allow access to the API. Accounts are registered at the AIbro <a href="https://aipaca.ai">website</a>.</p>
+
+<p>Authentication is required when APIs from <a href="https://pypi.org/project/aibro/">AIbro python library</a> are called for the first time.</p>
+<h2 id='start-the-first-inference-job-on-aibro'>Start The First Inference Job on AIbro</h2>
+<aside class="success">
+Play around the executable Colab tutorial <a href = "https://colab.research.google.com/drive/19sXZ4kbic681zqEsrl_CZfB5cegUwuIB#forceEdit=true&sandboxMode=true&scrollTo=Et8ivBtkckme"> here</a>
+</aside>
+<h3 id='step-1-install'>Step 1: Install</h3><div class="highlight"><pre class="highlight python tab-python"><code><span class="n">pip</span> <span class="n">install</span> <span class="n">aibro</span>
+</code></pre></div>
+<p>Install <a href="https://pypi.org/project/aibro/">aibro python library</a> by pip.</p>
+
+<p>If <code>OSError: protocol not found</code> shows up, it is caused by missing <code>/etc/protocols</code> file. This command should be able to resolve the error: <code>sudo apt-get -o Dpkg::Options::=&quot;--force-confmiss&quot; install --reinstall netbase</code></p>
+<h3 id='step-2-prepare-a-formatted-model-repo'>Step 2: Prepare a formatted model repo</h3><h3 id='step-3-create-an-inference-api-with-one-line-code'>Step 3: Create an inference API with one-line code</h3><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">aibro</span> <span class="kn">import</span> <span class="n">Inference</span>
+
+</code></pre></div><h2 id='aibro-inference'>aibro.Inference</h2><h3 id='deploy'>deploy()</h3><div class="highlight"><pre class="highlight python tab-python"><code>
+</code></pre></div><h4 id='parameters'>Parameters</h4><h3 id='complete'>complete()</h3><div class="highlight"><pre class="highlight python tab-python"><code><span class="k">def</span> <span class="nf">complete</span><span class="p">(</span>
+    <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span>
+    <span class="n">job_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span>
+    <span class="n">access_token</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span>
+<span class="p">):</span>
+</code></pre></div>
+<p>Completing an inference job shuts down all instances, and the inference API stop serving immediately.</p>
+<h4 id='parameters-2'>Parameters</h4>
+<p><strong>model_name</strong>: <em>str</em> = None <br/>
+The model name used in the deployed inference job. Since model name is unique, it can be used to search which job to complete. You may only need to input either <code>model_name</code> or <code>job_id</code>. If both parameters have input, <code>job_id</code> would be used to search inference job.</p>
+
+<p><strong>job_id</strong>: <em>str</em> = None <br/>
+The job_id of the deployed inference job. You may only need to input either <code>model_name</code> or <code>job_id</code>. If both parameters have input, <code>job_id</code> would be used to search inference job.</p>
+
+<p><strong>access_token</strong>: <em>str</em> = None <br/>
+The access token used in <a href="#authentication">authentication</a>. If its value is None, email and password would be required to input.</p>
+<h3 id='get-more-saving-by-cooling-instance'>Get more saving by cooling instance</h3><h3 id='inference-job-amp-instance-status'>Inference Job &amp; Instance Status</h3>
+<p>Once a job starts, its states and substates are updated on the <a href="https://aipaca.ai/jobs">Jobs page of AIbro Console</a>.</p>
+
+<table><thead>
+<tr>
+<th>Job Status</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>QUEUING</td>
+<td>Waiting for training</td>
+</tr>
+<tr>
+<td>TRAINING</td>
+<td>During training process or returning training results</td>
+</tr>
+<tr>
+<td>CANCELED</td>
+<td>Canceled due to some errors</td>
+</tr>
+<tr>
+<td>COMPLETED</td>
+<td>Completed the job</td>
+</tr>
+</tbody></table>
+
+<table><thead>
+<tr>
+<th>Job Substatus</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>REQUESTING SERVER</td>
+<td>Requesting an instance to train models</td>
+</tr>
+<tr>
+<td>CONNECTING SERVER</td>
+<td>Connecting an initializing instance</td>
+</tr>
+<tr>
+<td>GEARING UP ENV</td>
+<td>Gearing up tensorflow and mounting GPUs</td>
+</tr>
+<tr>
+<td>SENDING MODEL &amp; DATA</td>
+<td>Sending model and training data to the instance</td>
+</tr>
+<tr>
+<td>TRAINING</td>
+<td>Training model</td>
+</tr>
+<tr>
+<td>RETURNING</td>
+<td>Returning trained model</td>
+</tr>
+<tr>
+<td>CANCELED</td>
+<td>Canceled due to some errors</td>
+</tr>
+<tr>
+<td>COMPLETED</td>
+<td>Completed the job</td>
+</tr>
+</tbody></table>
+
+<table><thead>
+<tr>
+<th>Instance Status</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>LAUNCHING</td>
+<td>Setting up instance for training</td>
+</tr>
+<tr>
+<td>EXECUTING</td>
+<td>Having jobs in training process</td>
+</tr>
+<tr>
+<td>COOLING</td>
+<td>Within <a href="#cooling-period">Cooling Period</a></td>
+</tr>
+<tr>
+<td>CLOSING</td>
+<td>Stopping/terminating instance</td>
+</tr>
+<tr>
+<td>CLOSED</td>
+<td>instance has been stopped/terminated</td>
+</tr>
+</tbody></table>
+
+<table><thead>
+<tr>
+<th>Instance Substatus</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>STOPPING/STOPPED</td>
+<td>Shut down instance but retain root volume <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html">Reference</a></td>
+</tr>
+<tr>
+<td>TERMINATING/TERMINATED</td>
+<td>Completely delete the instance <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/terminating-instances.html">Reference</a></td>
+</tr>
+</tbody></table>
+
+<p>In the AIbro usage case, <a href="#setup-speed">Setup speed</a> is the main advantage of stopped instance over terminated instance.</p>
+
+<p>The following table is a status-substatus map of jobs and instances.</p>
+
+<table><thead>
+<tr>
+<th>Job Status</th>
+<th>Job Substatus</th>
+<th>Instance Status</th>
+<th>Instance Substatus</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>QUEUING</td>
+<td>REQUESTING SERVER</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>QUEUING</td>
+<td>CONNECTING SERVER</td>
+<td>LAUNCHING</td>
+<td></td>
+</tr>
+<tr>
+<td>QUEUING</td>
+<td>GEARING UP ENV</td>
+<td>LAUNCHING</td>
+<td></td>
+</tr>
+<tr>
+<td>QUEUING</td>
+<td>SENDING MODEL &amp; DATA</td>
+<td>LAUNCHING</td>
+<td></td>
+</tr>
+<tr>
+<td>----------</td>
+<td>------------</td>
+<td>----------------------</td>
+<td>--------------------------</td>
+</tr>
+<tr>
+<td>TRAINING</td>
+<td>TRAINING</td>
+<td>EXECUTING</td>
+<td></td>
+</tr>
+<tr>
+<td>TRAINING</td>
+<td>RETURNING</td>
+<td>EXECUTING</td>
+<td></td>
+</tr>
+<tr>
+<td>----------</td>
+<td>------------</td>
+<td>----------------------</td>
+<td>--------------------------</td>
+</tr>
+<tr>
+<td>CANCELED</td>
+<td>CANCELED</td>
+<td>COOLING/CLOSING/CLOSED</td>
+<td>COOLING/(STOPPING, TERMINATING)/(STOPPED, TERMINATED)</td>
+</tr>
+<tr>
+<td>COMPLETED</td>
+<td>COMPLETED</td>
+<td>COOLING/CLOSING/CLOSED</td>
+<td>COOLING/(STOPPING, TERMINATING)/(STOPPED, TERMINATED)</td>
+</tr>
+</tbody></table>
+<h1 id='cloud-instance'>Cloud Instance</h1>
+<p>We will use the word &quot;machine&quot; and &quot;server&quot; interchangeably with &quot;instance&quot; in the following content.</p>
+<h2 id='spot-vs-on-demand-instance'>Spot Vs On-demand Instance</h2><h3 id='machine-id'>Machine id</h3>
+<p>By simply adding &quot;.od&quot; after machine id to convert instance type from spot to on-demand (e.g. <em>p2.xlarge</em> is spot and <em>p2.xlarge.od</em> is on-demand).</p>
+<h3 id='pricing'>Pricing</h3>
+<p>Spot instances are usually 70% cheaper than their corresponding on-demand instances.</p>
+
+<p><img src="https://drive.google.com/uc?export=view&amp;id=1G6fVuxUu8Yofj_SBxl57m_lFZ83L4MzE" alt="" />
+<img src="https://drive.google.com/uc?export=view&amp;id=1vomqhv0C7-ZjmwZ62dv3bjFJZtL2-wiT" alt="" /></p>
+<h3 id='availability'>Availability</h3>
+<p>As a tradeoff, spot instance requests are not always fulfilled. We defined the term <strong>&quot;availability&quot;</strong> as the success probability of
+instance request.</p>
+
+<p>Clearly, the availability of on-demand instances are always 100%. Therefore, it is guaranteed to get an on-demand instance as long as there is enough capacity in AIbro marketplace. With a small possibility, AWS can runs out of capacity itself, but it is not detectable until the request error occurs in jobs.</p>
+
+<p>The availabilities of spot instances is varied by instance types and request time. In general, we found more powerful
+instance types have less availability (e.g. p3.2xlarge is less available than p2.xlarge). Meanwhile, spot instances are
+usually more available during non-working hours.</p>
+<h3 id='reliability'>Reliability</h3>
+<p>Spot instances have a chance to be interrupted by AWS. On-demand instances are always stable.</p>
+<h3 id='setup-speed'>Setup Speed</h3>
+<p>The <strong><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html">stop</a></strong> feature allows on-demand instances to be set up faster than spot instances. For the first time a <strong>new</strong> instance was requested, tensorflow always needs around 5-7 minutes to gear up before training starts. Unlike spot instances that can only be <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/terminating-instances.html"><strong>terminated</strong></a>, on-demand instances are stoppable, which reduces their second-time gear up time to 0.5-1.5 minutes. Both instance types can set <a href="#cooling-period">Cooling Period</a>, which, of course, won&#39;t have any gear up time at all.</p>
+
+<p>Except for longer gear up time, a spot instance needs extra time to fulfill its request.</p>
+
+<p>The following table compares the job timelines (refer to <a href="#plot_timeline">plot_timeline()</a>) of new, stopped, and cooling instances when training the same model &amp; data on the same instance.</p>
+
+<table><thead>
+<tr>
+<th>Type</th>
+<th>gear up time (minutes)</th>
+<th>timeline</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>new</td>
+<td>5-7</td>
+<td><a href="https://aibro-user-timeline.s3.amazonaws.com/example/new_instance_timeline.html">Timeline</a></td>
+</tr>
+<tr>
+<td>stopped</td>
+<td>0.5-1.5</td>
+<td><a href="https://aibro-user-timeline.s3.amazonaws.com/example/stopped_instance_timeline.html">Timeline</a></td>
+</tr>
+<tr>
+<td>cooling</td>
+<td>0</td>
+<td><a href="https://aibro-user-timeline.s3.amazonaws.com/example/cooling_server_timeline.html">Timeline</a></td>
+</tr>
+</tbody></table>
+<h1 id='contact-us'>Contact Us</h1>
+<p>You could reach out to us in one of the following ways:</p>
+
+<ol>
+<li><strong>Most recommend</strong>: <a href="https://join.slack.com/t/aipacainc/shared_invite/zt-s85idjfp-f~UwkvwuWi3TD1eTud4n5A">Slack Community</a> to direct message our support team</li>
+<li>Use the &quot;Contact Us&quot; button from our <a href="https://aipaca.ai">website</a></li>
+<li>Send message by <a href="#send_message"><code>aibro.Comm.send_message()</code></a></li>
+<li>Email us at <a href = "mailto: hello@aipaca.ai">hello@aipaca.ai</a></li>
+</ol>
+<h1 id='data-privacy'>Data Privacy</h1>
+<p>While using every feature, AIbro needs data access at different levels. Usually, the more accesses a feature needs the better experience will be created (e.g. more time/money saving). Of course, whether using those features is totally upon your decision. By default, online_fit won&#39;t have any access. The following table gives a privacy item overview of each feature.</p>
+
+<table><thead>
+<tr>
+<th>Feature</th>
+<th>Server access</th>
+<th>Model Access</th>
+<th>Data Access</th>
+<th>Reason</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Cooling server</td>
+<td><strong>Yes</strong></td>
+<td>No</td>
+<td>No</td>
+<td>AIbro needs to retain the server access to reuse the cooling instances. The access will be permanently deleted once the instances is terminated</td>
+</tr>
+<tr>
+<td>Stopped server</td>
+<td><strong>Yes</strong></td>
+<td>No</td>
+<td>No</td>
+<td>AIbro needs to retain the server access to restart stopped instances. The access will be permanently deleted once the instances is terminated</td>
+</tr>
+<tr>
+<td>Report job</td>
+<td>No</td>
+<td><strong>Yes</strong></td>
+<td><strong>Yes</strong></td>
+<td>Support team needs the Model &amp; data to replay the job and diagnose the reported issues</td>
+</tr>
+</tbody></table>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="python">python</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
