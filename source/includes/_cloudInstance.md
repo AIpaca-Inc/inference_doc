@@ -29,17 +29,3 @@ usually more available during non-working hours.
 ### Reliability
 
 Spot instances have a chance to be interrupted by AWS. On-demand instances are always stable.
-
-### Setup Speed
-
-The **[stop](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html)** feature allows on-demand instances to be set up faster than spot instances. For the first time a **new** instance was requested, tensorflow always needs around 5-7 minutes to gear up before training starts. Unlike spot instances that can only be [**terminated**](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/terminating-instances.html), on-demand instances are stoppable, which reduces their second-time gear up time to 0.5-1.5 minutes. Both instance types can set [Cooling Period](#cooling-period), which, of course, won't have any gear up time at all.
-
-Except for longer gear up time, a spot instance needs extra time to fulfill its request.
-
-The following table compares the job timelines (refer to [plot_timeline()](#plot_timeline)) of new, stopped, and cooling instances when training the same model & data on the same instance.
-
-| Type    | gear up time (minutes) | timeline                                                                                        |
-| ------- | ---------------------- | ----------------------------------------------------------------------------------------------- |
-| new     | 5-7                    | [Timeline](https://aibro-user-timeline.s3.amazonaws.com/example/new_instance_timeline.html)     |
-| stopped | 0.5-1.5                | [Timeline](https://aibro-user-timeline.s3.amazonaws.com/example/stopped_instance_timeline.html) |
-| cooling | 0                      | [Timeline](https://aibro-user-timeline.s3.amazonaws.com/example/cooling_server_timeline.html)   |
