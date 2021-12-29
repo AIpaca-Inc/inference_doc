@@ -4,9 +4,9 @@
 
 ```python
 def deploy(
-    model_name: str,
-    machine_id_config: Union[str, dict],
     artifacts_path: Union[str, list],
+    model_name: str = None,
+    machine_id_config: Union[str, dict] = None,
     dryrun: bool = False,
     cool_down_period_s: int = 600,
     client_ids: List[str] = [],
@@ -20,11 +20,19 @@ This method starts an inference job to deploy models on cloud instances.
 
 ### Parameters
 
-**model_name**: _str_ <br/>
-The model name used in the deployed inference job. In the scope of user profile, the model name should be unique respect to the model names from all active inference jobs.
+**artifacts_path**: _Union[str, list]_ <br/>
+The path to the formatted repo. The input type can be either string or dictionary:
+
+| Type | Syntax                                                                                                                                                 | Meaning                                                                                                                                       |
+| ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| str  | `"path/to/repo"`                                                                                                                                       | The whole repo would be uploaded and deployed on cloud                                                                                        |
+| list | `["./path/to/model",`<br/> `"./path/to/predict.py",`<br/> `"./path/to/data",`<br/> `"./path/to/requirements.txt",`<br/> `"./path/to/other_artifacts"]` | Select important artifacts one-by-one. AIbro would combine and recreate a model repo called `aibro_repo` under the root path of aibro library |
+
+**model_name**: _str_ = None <br/>
+The model name used in the deployed inference job. It could only be None iff `dryun==False`. In the scope of user profile, the model name should be unique with respect to the model names from all active inference jobs.
 
 **machine_id_config**: _Union[str, dict]_ <br/>
-The machine configuration used to deploy the model. The input type can be either string or dictionary:
+The machine configuration used to deploy the model. It could only be None iff `dryun==False`. The input type can be either string or dictionary:
 
 | Type | Syntax                                                     | Meaning                                                                                                                         |
 | ---- | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
@@ -42,32 +50,24 @@ In the configuration, machines are categorized into "Standby" and "Cooling". In 
 - Standby instance: the instance never turns off.
 - Cooling instance: the instance only turns on when receiving a new inference request and only turns off when no inference request is received within `cool_down_period_s` seconds.
 
-For more details about the usage of standby and cooling instances, checkout the [section below](#standby-and-cooling-instances).
+For more details about the usage of standby and cooling instances, check out the [section below](#standby-and-cooling-instances).
 
 <aside class="notice">
-<span style="font-weight: bold">FAQ: Why machine_id_config only accept on-demand instances? Isn't it more expensive than spot?</span> <br/>
+<span style="font-weight: bold">FAQ: Why machine_id_config only accept on-demand instances? Isn't it more expensive than the spot?</span> <br/>
 
-Answer: spot instance is not always available, using on-demand instance is to ensure that inference job can always get a server. If spot instances are available, AIbro automatically replaces its same-type on-demand instances to save your cost.
+Answer: spot instance is not always available, using on-demand instance is to ensure that the inference job can always get a server. If spot instances are available, AIbro automatically replaces its same-type on-demand instances to save your cost.
 
 </aside>
 
-**artifacts_path**: _Union[str, list]_ <br/>
-The path to the formatted repo. The input type can be either string or dictionary:
-
-| Type | Syntax                                                                                                                                                 | Meaning                                                                                                                                       |
-| ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| str  | `"path/to/repo"`                                                                                                                                       | The whole repo would be uploaded and deployed on cloud                                                                                        |
-| list | `["./path/to/model",`<br/> `"./path/to/predict.py",`<br/> `"./path/to/data",`<br/> `"./path/to/requirements.txt",`<br/> `"./path/to/other_artifacts"]` | Select important artifacts one-by-one. AIbro would combine and recreate a model repo called `aibro_repo` under the root path of aibro library |
-
 **dryrun**: _bool = False_<br/>
-The argument used to test model repo locally. If `dryrun==True`, `deploy()` would start validating the repo structure and testing if inference result can be successfully returned.
+The argument used to test model repo locally. If `dryrun==True`, `deploy()` would start validating the repo structure and testing if the inference result can be successfully returned.
 
 **cool_down_period_s**: _int = 600_<br/>
 The cool down period of cooling instance. By default, the cooling instance would stop once there is no new inference request coming within 600 seconds.
 
 **client_ids**: _List[str] = []_<br/>
 The argument used to restrict specific clients to access to your inference API. The client ids can be customized in any syntax as long as there is no duplication. If there is no client id, the inference job becomes public. `Inference.update_clients()` can be used to add/remove client ids. <br/>
-As mentioned in the [tutorial](#step-3-create-an-inference-api-with-one-line-code), client id is used as a part of API URL. <br/>
+As mentioned in the [tutorial](#step-3-create-an-inference-api-with-one-line-code), client id is used as a part of the API URL. <br/>
 The table below clarifies the definitions of roles.
 
 | Role       | Description                                    |
@@ -82,7 +82,7 @@ The access token used in [authentication](#authentication). If its value is None
 The description used to remind which inference job was which.
 
 **wait_request_s**: _int = 30_<br/>
-The time in seconds used to wait for instance request to be fulfilled.
+The time in seconds used to wait for instance requests to be fulfilled.
 
 ## complete()
 
@@ -99,10 +99,10 @@ Completing an inference job shuts down all instances and stops its API services.
 ### Parameters
 
 **model_name**: _str_ = None <br/>
-The model name used in the deployed inference job. Since model name is required to be unique, it can be used to search which job to complete. You may only need to input either `model_name` or `job_id`. If both parameters have input, `job_id` would be used to search inference job.
+The model name used in the deployed inference job. Since a model name is required to be unique, it can be used to search which job to complete. You may only need to input either `model_name` or `job_id`. If both parameters have input, `job_id` would be used to search inference jobs.
 
 **job_id**: _str_ = None <br/>
-The job_id of the deployed inference job. You may only need to input either `model_name` or `job_id`. If both parameters have input, `job_id` would be used to search inference job.
+The job_id of the deployed inference job. You may only need to input either `model_name` or `job_id`. If both parameters have input, `job_id` would be used to search inference jobs.
 
 **access_token**: _str_ = None <br/>
 The access token used in [authentication](#authentication). If its value is None, email and password would be required to input.
@@ -134,10 +134,10 @@ The argument used to remove one single or one list of client ids. Client ids tha
 If the argument is set `True`, it removes all client ids and the inference job becomes public.
 
 **model_name**: _str_ = None <br/>
-The model name used in the deployed inference job. Since model name is required to be unique, it can be used to search the targeted inference job. You may only need to input either `model_name` or `job_id`. If both parameters have input, `job_id` would be used to search inference job.
+The model name used in the deployed inference job. Since a model name is required to be unique, it can be used to search the targeted inference job. You may only need to input either `model_name` or `job_id`. If both parameters have input, `job_id` would be used to search inference jobs.
 
 **job_id**: _str_ = None <br/>
-The job_id of the deployed inference job. You may only need to input either `model_name` or `job_id`. If both parameters have input, `job_id` would be used to search inference job.
+The job_id of the deployed inference job. You may only need to input either `model_name` or `job_id`. If both parameters have input, `job_id` would be used to search inference jobs.
 
 **access_token**: _str_ = None <br/>
 The access token used in [authentication](#authentication). If its value is None, email and password would be required to input.
@@ -157,10 +157,10 @@ Return a list of client ids of the targeted inference job.
 ### Parameters
 
 **model_name**: _str_ = None <br/>
-The model name used in the deployed inference job. Since model name is required to be unique, it can be used to search the targeted inference job. You may only need to input either `model_name` or `job_id`. If both parameters have input, `job_id` would be used to search inference job.
+The model name used in the deployed inference job. Since a model name is required to be unique, it can be used to search the targeted inference job. You may only need to input either `model_name` or `job_id`. If both parameters have input, `job_id` would be used to search inference jobs.
 
 **job_id**: _str_ = None <br/>
-The job_id of the deployed inference job. You may only need to input either `model_name` or `job_id`. If both parameters have input, `job_id` would be used to search inference job.
+The job_id of the deployed inference job. You may only need to input either `model_name` or `job_id`. If both parameters have input, `job_id` would be used to search inference jobs.
 
 **access_token**: _str_ = None <br/>
 The access token used in [authentication](#authentication). If its value is None, email and password would be required to input.
@@ -172,21 +172,21 @@ The access token used in [authentication](#authentication). If its value is None
 - Standby instance: the instance never turns off.
 - Cooling instance: the instance only turns on when receiving a new inference request and only turns off when no inference request is received within `cool_down_period_s` seconds.
 
-If both standby and cooling instances are turned on, the cooling instance would have higher priority to handle upcoming inference requests.
+If both standby and cooling instances are turned on, the cooling instance would have a higher priority to handle upcoming inference requests.
 
 ### Configure for non-uniform traffic
 
-In a simple word, the combination of standby and cooling instance configuration is a cross-instance scaling strategy. Let's say you want to build an inference API for a web application. The call frequency is proportional to the site traffic, which is usually non-uniform (e.g. more traffic during the day and a few during the night). To take the advantage of the configuration, you may set a CPU or cheaper GPU instance as the standby instance and set a powerful GPU instance as the cooling instance. In this way, the powerful cooling instance would efficiently handle intensive traffic during the day and standby instance would save your money during the night and still keep the near real-time performance.
+In simple words, the combination of standby and cooling instance configuration is a cross-instance scaling strategy. Let's say you want to build an inference API for a web application. The call frequency is proportional to the site traffic, which is usually non-uniform (e.g. more traffic during the day and a few during the night). To take the advantage of the configuration, you may set a CPU or cheaper GPU instance as the standby instance and set a powerful GPU instance as the cooling instance. In this way, the powerful cooling instance would efficiently handle intensive traffic during the day and the standby instance would save your money during the night and still keep the near real-time performance.
 
 ### Configure for high traffic
 
-On the other hands, if your site traffic is more uniform or people are just never stop using it, it is more recommended to only use standby instance with the powerful GPU. Why is that? if you kept the previous configuration which uses a weak standby and a powerful cooling, the cooling instance may just never end its cooling period since there are always requests coming. In this case, the weak standby instance is not applied at all and wasted.
+On the other hand, if your site traffic is more uniform or people just never stop using it, it is more recommended to only use standby instances with the powerful GPU. Why is that? if you kept the previous configuration which uses a weak standby and a powerful cooling, the cooling instance may just never end its cooling period since there are always requests coming. In this case, the weak standby instance is not applied at all and is wasted.
 
 ### Case study: calculate the saving
 
 ![](https://drive.google.com/uc?export=view&id=1sLxQ6SZDamjT9qGp2JE7zElUZwIpLQ3I)
 
-**Graph explanation**: Given that you created an inference job with configuration `machine_id_config = {"standby": "g4dn.4xlarge", "cooling": "g4dn.12xlarge.od"}`. The inference job was applied from 8:00 am to 11.59 pm. Most inference requests (IRs) were received during morning and afternoon. Every time an IR was received by the cooling instance, the instance's cool down period reset. If the cool down period passed by without receiving one IR, the cooling instance stopped, and the standby instance handled the next IR. At that time, the standby started invoking back the stopped cooling instance. The standby instance also processed the following IRs until the cooling instance fully woke up. Within the 16 hours, cooling instances was turned on for 6 hours and standby instance never turned off. The machine pricing are shown below:
+**Graph explanation**: Given that you created an inference job with configuration `machine_id_config = {"standby": "g4dn.4xlarge", "cooling": "g4dn.12xlarge.od"}`. The inference job was applied from 8:00 am to 11.59 pm. Most inference requests (IRs) were received during the morning and afternoon. Every time an IR was received by the cooling instance, the instance's cooldown period reset. If the cooldown period passed by without receiving one IR, the cooling instance stopped, and the standby instance handled the next IR. At that time, the standby started invoking back the stopped cooling instance. The standby instance also processed the following IRs until the cooling instance fully woke up. Within the 16 hours, cooling instances were turned on for 6 hours and the standby instance was never turned off. The machine pricing is shown below:
 
 | Machine id       | Pricing  |
 | ---------------- | -------- |

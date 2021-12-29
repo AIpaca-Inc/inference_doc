@@ -20,7 +20,7 @@ Spot instances are usually 70% cheaper than their corresponding on-demand instan
 As a tradeoff, spot instance requests are not always fulfilled. We defined the term **"availability"** as the success probability of
 instance request.
 
-Clearly, the availability of on-demand instances are always 100%. Therefore, it is guaranteed to get an on-demand instance as long as there is enough capacity in AIbro marketplace. With a small possibility, AWS can runs out of capacity itself, but it is not detectable until the request error occurs in jobs.
+Clearly, the availabilities of on-demand instances are always 100%. Therefore, it is guaranteed to get an on-demand instance as long as there is enough capacity in the AIbro marketplace. With a small possibility, AWS can run out of capacity itself, but it is not detectable until the request error occurs in jobs.
 
 The availabilities of spot instances is varied by instance types and request time. In general, we found more powerful
 instance types have less availability (e.g. p3.2xlarge is less available than p2.xlarge). Meanwhile, spot instances are
