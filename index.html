@@ -716,6 +716,8 @@ Play around with the executable Colab tutorial <a href = "https://colab.research
 <li>If the data type is not one of <code>json</code>, <code>txt</code>, or <code>csv</code>, you could zip the entire <code>data</code> folder then post the data file by the zip path.</li>
 </ul>
 
+<p><strong>The posted data will replace everything in the <code>data</code> folder. Therefore, your posted data should have the same format as whatever you had in the <code>data</code> folder initially.</strong></p>
+
 <p><em>Tips</em>: if your inference time is over one minute, it is recommended to either reduce the data size or increase the <code>--keepalive-time</code> value when using <code>curl</code>.</p>
 <h2 id='step-6-limit-api-access-to-specific-clients-optional'>Step 6: Limit API Access to Specific Clients (Optional)</h2>
 <p>As the API owner, you probably don&#39;t receive overwhelming API requests from everywhere. To avoid this trouble, you could give every client a unique client id, which is going to be used in API endpoints (as the showing syntax in step 4). If no client id is added, this inference job would become public.</p>
