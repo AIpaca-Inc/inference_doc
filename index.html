@@ -672,7 +672,7 @@ Play around with the executable Colab tutorial <a href = "https://colab.research
 </code></pre></div>
 <p>Assume the formatted model repo is saved at path &quot;./aibro_repo&quot;, we can now use it to create an inference job. The model name should be unique with respect to all current <a href="https://aipaca.ai/inference_jobs">active inference jobs</a> under your profile.</p>
 
-<p>In this example, we deployed a public custom model from &quot;./aibro_repo&quot; called &quot;my_fancy_transformer&quot; on machine type &quot;c5.large.od&quot; and used an access token for authentication.</p>
+<p>In this example, we deployed a public custom model from &quot;./aibro_repo&quot; called &quot;my_fancy_transformer&quot; on machine &quot;c5.large.od&quot; and used an access token for authentication.</p>
 
 <p>Once the deployment is finished, an API URL is returned with the syntax: </br></p>
 
@@ -680,21 +680,23 @@ Play around with the executable Colab tutorial <a href = "https://colab.research
 <li><strong>http://api.aipaca.ai/v1/{username}/{client_id}/{model_name}/predict</strong> </br></li>
 </ul>
 
+<p><strong>{client_id}</strong>: if your inference job is public, <strong>{client_id}</strong> is filled by &quot;public&quot;. Otherwise, <strong>{client_id}</strong> should be filled by one of your <a href="#add-clients">clients&#39; ID</a>.</p>
+
 <p>In this tutorial, the API URL should look like:</p>
 
 <ul>
 <li><strong>http://api.aipaca.ai/v1/{username}/public/my_fancy_transformer/predict</strong> </br></li>
 </ul>
-
-<p><strong>{client_id}</strong>: if your inference job is public, <strong>{client_id}</strong> is filled by &quot;public&quot;. Otherwise, <strong>{client_id}</strong> should be filled by one of your <a href="#add-clients">clients&#39; ID</a>.</p>
 <h2 id='step-5-test-a-aibro-api-with-curl'>Step 5: Test a Aibro API with curl:</h2><div class="highlight"><pre class="highlight python tab-python"><code><span class="n">curl</span> <span class="o">-</span><span class="n">X</span> <span class="n">POST</span> <span class="s">"http://api.aipaca.ai/v1/{username}/public/my_fancy_transformer/predict"</span> <span class="o">-</span><span class="n">d</span> <span class="s">'{"data": "Olá"}'</span>
 <span class="c1"># replace the {username} by your own
 </span></code></pre></div>
+<p>You should feel free to use whatever API tool that you got used to. <code>curl</code> is just the one that in our taste.</p>
+
 <p>The syntax when using <code>curl</code> depends on the file type in the <code>data</code> folder. In this tutorial, we used the <code>json</code> type.</p>
 
 <table><thead>
 <tr>
-<th>Data Type</th>
+<th>File Type</th>
 <th>syntax</th>
 </tr>
 </thead><tbody>
@@ -719,9 +721,9 @@ Play around with the executable Colab tutorial <a href = "https://colab.research
 <p>You may have observed some patterns from the syntax lookup table above:</p>
 
 <ul>
-<li>If the data type is <code>json</code> or <code>txt</code>, you could use <code>-d</code> flag to post the string data directly.</li>
-<li>If the data type is one of <code>json</code>, <code>txt</code>, or <code>csv</code>, you could use <code>-F</code> flag to post the data file by path.</li>
-<li>If the data type is not one of <code>json</code>, <code>txt</code>, or <code>csv</code>, you could zip the entire <code>data</code> folder then post the data file by the zip path.</li>
+<li>If the file type is <code>json</code> or <code>txt</code>, you could use <code>-d</code> flag to post the string data directly.</li>
+<li>If the file type is one of <code>json</code>, <code>txt</code>, or <code>csv</code>, you could use <code>-F</code> flag to post the data file by path.</li>
+<li>If the file type is not one of <code>json</code>, <code>txt</code>, or <code>csv</code>, you could zip the entire <code>data</code> folder then post the data file by the zip path.</li>
 </ul>
 
 <p><strong>The posted data will replace everything in the <code>data</code> folder. Therefore, your posted data should have the same format as whatever you had in the <code>data</code> folder initially.</strong></p>
