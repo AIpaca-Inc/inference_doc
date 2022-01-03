@@ -358,10 +358,13 @@
                     <a href="#step-4-create-an-inference-api-with-one-line-code" class="toc-h2 toc-link" data-title="Step 4: Create an inference API with one-line code">Step 4: Create an inference API with one-line code</a>
                   </li>
                   <li>
-                    <a href="#step-5-limit-api-access-to-specific-clients-optional" class="toc-h2 toc-link" data-title="Step 5: Limit API Access to Specific Clients (Optional)">Step 5: Limit API Access to Specific Clients (Optional)</a>
+                    <a href="#step-5-test-a-aibro-api-with-curl" class="toc-h2 toc-link" data-title="Step 5: Test a Aibro API with curl:">Step 5: Test a Aibro API with curl:</a>
                   </li>
                   <li>
-                    <a href="#step-6-complete-job" class="toc-h2 toc-link" data-title="Step 6: Complete Job">Step 6: Complete Job</a>
+                    <a href="#step-6-limit-api-access-to-specific-clients-optional" class="toc-h2 toc-link" data-title="Step 6: Limit API Access to Specific Clients (Optional)">Step 6: Limit API Access to Specific Clients (Optional)</a>
+                  </li>
+                  <li>
+                    <a href="#step-7-complete-job" class="toc-h2 toc-link" data-title="Step 7: Complete Job">Step 7: Complete Job</a>
                   </li>
               </ul>
           </li>
@@ -649,6 +652,8 @@ Play around with the executable Colab tutorial <a href = "https://colab.research
 <p>There is no format restriction on the &quot;model&quot; and &quot;data&quot; folder as long as the input and output of load_model() and run() from predict.py are correct.</p>
 <h3 id='requirement-txt'><strong>requirement.txt</strong></h3>
 <p>Before starting deploying the model, packages from requirement.txt are installed to set up the environment.</p>
+
+<p>If your requirement.txt contains paths (such as <code>pandas @ file:///....</code>), it was an open issue with <code>pip freeze</code> in version <code>20.1</code>. You could use <code>pip list --format=freeze &gt; requirements.txt</code> as a workaround.</p>
 <h3 id='other-artifacts'><strong>Other Artifacts</strong></h3>
 <p>All other files/folders.</p>
 <h2 id='step-3-test-the-repo-by-dryrun'>Step 3: Test the Repo by Dryrun</h2><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">aibro</span> <span class="kn">import</span> <span class="n">Inference</span>
@@ -663,28 +668,63 @@ Play around with the executable Colab tutorial <a href = "https://colab.research
     <span class="n">model_name</span> <span class="o">=</span> <span class="s">"my_fancy_transformer"</span><span class="p">,</span>
     <span class="n">machine_id_config</span> <span class="o">=</span> <span class="s">"c5.large.od"</span><span class="p">,</span>
     <span class="n">artifacts_path</span> <span class="o">=</span> <span class="s">"./aibro_repo"</span><span class="p">,</span>
-    <span class="n">client_ids</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># if no clients are specified, the inference job becomes public
-</span><span class="p">)</span>
+<span class="p">)</span>
 </code></pre></div>
 <p>Assume the formatted model repo is saved at path &quot;./aibro_repo&quot;, we can now use it to create an inference job. The model name should be unique with respect to all current <a href="https://aipaca.ai/inference_jobs">active inference jobs</a> under your profile.</p>
 
 <p>In this example, we deployed a public custom model from &quot;./aibro_repo&quot; called &quot;my_fancy_transformer&quot; on machine type &quot;c5.large.od&quot; and used an access token for authentication.</p>
 
-<p>Once the deployment finished, an API URL is returned with the syntax: </br></p>
+<p>Once the deployment is finished, an API URL is returned with the syntax: </br></p>
 
 <ul>
 <li><strong>https://api.aipaca.ai/v1/{username}/{client_id}/{model_name}/predict</strong> </br></li>
 </ul>
 
 <p><strong>{client_id}</strong>: if your inference job is public, <strong>{client_id}</strong> is filled by &quot;public&quot;. Otherwise, <strong>{client_id}</strong> should be filled by one of your <a href="#add-clients">clients&#39; ID</a>.</p>
-<h2 id='step-5-limit-api-access-to-specific-clients-optional'>Step 5: Limit API Access to Specific Clients (Optional)</h2>
+<h2 id='step-5-test-a-aibro-api-with-curl'>Step 5: Test a Aibro API with curl:</h2>
+<p>The syntax when using <code>curl</code> depends on the file type in the <code>data</code> folder.</p>
+
+<table><thead>
+<tr>
+<th>Data Type</th>
+<th>syntax</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>json</td>
+<td>curl -X POST {{aibro url}} -d &#39;{&quot;your&quot;: &quot;data&quot;}&#39;<br/>curl -X POST {{aibro url}} -F file=@&#39;path/to/json/file&#39;</td>
+</tr>
+<tr>
+<td>txt</td>
+<td>curl -X POST {{aibro url}} -d &#39;your data&#39;<br/>curl -X POST {{aibro url}} -F file=@&#39;path/to/txt/file&#39;</td>
+</tr>
+<tr>
+<td>csv</td>
+<td>curl -X POST {{aibro url}} -F file=@&#39;path/to/csv/file&#39;</td>
+</tr>
+<tr>
+<td>others</td>
+<td>curl -X POST {{aibro url}} -F file=@&#39;path/to/zip/file&#39;</td>
+</tr>
+</tbody></table>
+
+<p>You may have observed some patterns from the syntax lookup table above:</p>
+
+<ul>
+<li>If the data type is <code>json</code> or <code>txt</code>, you could use <code>-d</code> flag to post the string data directly.</li>
+<li>If the data type is one of <code>json</code>, <code>txt</code>, or <code>csv</code>, you could use <code>-F</code> flag to post the data file by path.</li>
+<li>If the data type is not one of <code>json</code>, <code>txt</code>, or <code>csv</code>, you could zip the entire <code>data</code> folder then post the data file by the zip path.</li>
+</ul>
+
+<p><em>Tips</em>: if your inference time is over one minute, it is recommended to either reduce the data size or increase the <code>--keepalive-time</code> value when using <code>curl</code>.</p>
+<h2 id='step-6-limit-api-access-to-specific-clients-optional'>Step 6: Limit API Access to Specific Clients (Optional)</h2>
 <p>As the API owner, you probably don&#39;t receive overwhelming API requests from everywhere. To avoid this trouble, you could give every client a unique client id, which is going to be used in API endpoints (as the showing syntax in step 4). If no client id is added, this inference job would become public.</p>
 <div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">aibro</span> <span class="kn">import</span> <span class="n">Inference</span>
 <span class="n">Inference</span><span class="p">.</span><span class="n">update_clients</span><span class="p">(</span>
     <span class="n">job_id</span><span class="p">,</span>
     <span class="n">add_client_ids</span> <span class="o">=</span> <span class="p">[</span><span class="s">"client_1"</span><span class="p">,</span> <span class="s">"client_2"</span><span class="p">]</span>
 <span class="p">)</span>
-</code></pre></div><h2 id='step-6-complete-job'>Step 6: Complete Job</h2>
+</code></pre></div><h2 id='step-7-complete-job'>Step 7: Complete Job</h2>
 <p>Once the inference job is no longer used, to avoid unnecessary cost, please remember to close it by <code>Inference.complete()</code>.</p>
 <div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">aibro</span> <span class="kn">import</span> <span class="n">Inference</span>
 <span class="n">Inference</span><span class="p">.</span><span class="n">complete</span><span class="p">(</span><span class="n">job_id</span><span class="p">)</span>
@@ -1133,7 +1173,7 @@ usually more available during non-working hours.</p>
 <p>You could reach out to us in one of the following ways:</p>
 
 <ol>
-<li><strong>Most recommend</strong>: <a href="https://join.slack.com/t/aipacainc/shared_invite/zt-s85idjfp-f~UwkvwuWi3TD1eTud4n5A">Slack Community</a> to direct message our support team</li>
+<li><strong>Most recommend</strong>: <a href="https://discord.gg/kEdtjUYb">Discord Community</a> to direct message our support team</li>
 <li>Use the &quot;Contact Us&quot; button from our <a href="https://aipaca.ai">website</a></li>
 <li>Send message by <a href="#send_message"><code>aibro.Comm.send_message()</code></a></li>
 <li>Email us at <a href = "mailto: hello@aipaca.ai">hello@aipaca.ai</a></li>
