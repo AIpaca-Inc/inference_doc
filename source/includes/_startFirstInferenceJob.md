@@ -72,6 +72,8 @@ There is no format restriction on the "model" and "data" folder as long as the i
 
 Before starting deploying the model, packages from requirement.txt are installed to set up the environment.
 
+If your requirement.txt contains paths (such as `pandas @ file:///....`), it was an open issue with `pip freeze` in version `20.1`. You could use `pip list --format=freeze > requirements.txt` as a workaround.
+
 ### **Other Artifacts**
 
 All other files/folders.
@@ -79,7 +81,7 @@ All other files/folders.
 ## Step 3: Test the Repo by Dryrun
 
 ```python
-from aibro import Inference
+from aibro.inference import Inference
 api_url = Inference.deploy(
     artifacts_path = "./aibro_repo",
     dryrun = True,
@@ -91,42 +93,73 @@ Dryrun locally validates the repo structure and tests if inference result can be
 ## Step 4: Create an inference API with one-line code
 
 ```python
-from aibro import Inference
+from aibro.inference import Inference
 api_url = Inference.deploy(
     model_name = "my_fancy_transformer",
     machine_id_config = "c5.large.od",
     artifacts_path = "./aibro_repo",
-    client_ids = [] # if no clients are specified, the inference job becomes public
 )
 ```
 
 Assume the formatted model repo is saved at path "./aibro_repo", we can now use it to create an inference job. The model name should be unique with respect to all current [active inference jobs](https://aipaca.ai/inference_jobs) under your profile.
 
-In this example, we deployed a public custom model from "./aibro_repo" called "my_fancy_transformer" on machine type "c5.large.od" and used an access token for authentication.
+In this example, we deployed a public custom model from "./aibro_repo" called "my_fancy_transformer" on machine "c5.large.od" and used an access token for authentication.
 
-Once the deployment finished, an API URL is returned with the syntax: </br>
+Once the deployment is finished, an API URL is returned with the syntax: </br>
 
-- **https://api.aipaca.ai/v1/{username}/{client_id}/{model_name}/predict** </br>
+- **http://api.aipaca.ai/v1/{username}/{client_id}/{model_name}/predict** </br>
 
 **{client_id}**: if your inference job is public, **{client_id}** is filled by "public". Otherwise, **{client_id}** should be filled by one of your [clients' ID](#add-clients).
 
-## Step 5: Limit API Access to Specific Clients (Optional)
+In this tutorial, the API URL should look like:
+
+- **http://api.aipaca.ai/v1/{username}/public/my_fancy_transformer/predict** </br>
+
+## Step 5: Test a Aibro API with curl:
+
+```python
+curl -X POST "http://api.aipaca.ai/v1/{username}/public/my_fancy_transformer/predict" -d '{"data": "Olá"}'
+# replace the {username} by your own
+```
+
+You should feel free to use whatever API tool that you got used to. `curl` is just the one that in our taste.
+
+The syntax when using `curl` depends on the file type in the `data` folder. In this tutorial, we used the `json` type.
+
+| File Type | syntax                                                                                                   |
+| --------- | -------------------------------------------------------------------------------------------------------- |
+| json      | curl -X POST {{api url}} -d '{"your": "data"}'<br/>curl -X POST {{api url}} -F file=@'path/to/json/file' |
+| txt       | curl -X POST {{api url}} -d 'your data'<br/>curl -X POST {{api url}} -F file=@'path/to/txt/file'         |
+| csv       | curl -X POST {{api url}} -F file=@'path/to/csv/file'                                                     |
+| others    | curl -X POST {{api url}} -F file=@'path/to/zip/file'                                                     |
+
+You may have observed some patterns from the syntax lookup table above:
+
+- If the file type is `json` or `txt`, you could use `-d` flag to post the string data directly.
+- If the file type is one of `json`, `txt`, or `csv`, you could use `-F` flag to post the data file by path.
+- If the file type is not one of `json`, `txt`, or `csv`, you could zip the entire `data` folder then post the data file by the zip path.
+
+**The posted data will replace everything in the `data` folder. Therefore, your posted data should have the same format as whatever you had in the `data` folder initially.**
+
+_Tips_: if your inference time is over one minute, it is recommended to either reduce the data size or increase the `--keepalive-time` value when using `curl`.
+
+## Step 6: Limit API Access to Specific Clients (Optional)
 
 As the API owner, you probably don't receive overwhelming API requests from everywhere. To avoid this trouble, you could give every client a unique client id, which is going to be used in API endpoints (as the showing syntax in step 4). If no client id is added, this inference job would become public.
 
 ```python
-from aibro import Inference
+from aibro.inference import Inference
 Inference.update_clients(
     job_id,
     add_client_ids = ["client_1", "client_2"]
 )
 ```
 
-## Step 6: Complete Job
+## Step 7: Complete Job
 
 Once the inference job is no longer used, to avoid unnecessary cost, please remember to close it by `Inference.complete()`.
 
 ```python
-from aibro import Inference
+from aibro.inference import Inference
 Inference.complete(job_id)
 ```
