@@ -656,14 +656,14 @@ Play around with the executable Colab tutorial <a href = "https://colab.research
 <p>If your requirement.txt contains paths (such as <code>pandas @ file:///....</code>), it was an open issue with <code>pip freeze</code> in version <code>20.1</code>. You could use <code>pip list --format=freeze &gt; requirements.txt</code> as a workaround.</p>
 <h3 id='other-artifacts'><strong>Other Artifacts</strong></h3>
 <p>All other files/folders.</p>
-<h2 id='step-3-test-the-repo-by-dryrun'>Step 3: Test the Repo by Dryrun</h2><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">aibro</span> <span class="kn">import</span> <span class="n">Inference</span>
+<h2 id='step-3-test-the-repo-by-dryrun'>Step 3: Test the Repo by Dryrun</h2><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">aibro.inference</span> <span class="kn">import</span> <span class="n">Inference</span>
 <span class="n">api_url</span> <span class="o">=</span> <span class="n">Inference</span><span class="p">.</span><span class="n">deploy</span><span class="p">(</span>
     <span class="n">artifacts_path</span> <span class="o">=</span> <span class="s">"./aibro_repo"</span><span class="p">,</span>
     <span class="n">dryrun</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span>
 <span class="p">)</span>
 </code></pre></div>
 <p>Dryrun locally validates the repo structure and tests if inference result can be successfully returned.</p>
-<h2 id='step-4-create-an-inference-api-with-one-line-code'>Step 4: Create an inference API with one-line code</h2><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">aibro</span> <span class="kn">import</span> <span class="n">Inference</span>
+<h2 id='step-4-create-an-inference-api-with-one-line-code'>Step 4: Create an inference API with one-line code</h2><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">aibro.inference</span> <span class="kn">import</span> <span class="n">Inference</span>
 <span class="n">api_url</span> <span class="o">=</span> <span class="n">Inference</span><span class="p">.</span><span class="n">deploy</span><span class="p">(</span>
     <span class="n">model_name</span> <span class="o">=</span> <span class="s">"my_fancy_transformer"</span><span class="p">,</span>
     <span class="n">machine_id_config</span> <span class="o">=</span> <span class="s">"c5.large.od"</span><span class="p">,</span>
@@ -731,14 +731,14 @@ Play around with the executable Colab tutorial <a href = "https://colab.research
 <p><em>Tips</em>: if your inference time is over one minute, it is recommended to either reduce the data size or increase the <code>--keepalive-time</code> value when using <code>curl</code>.</p>
 <h2 id='step-6-limit-api-access-to-specific-clients-optional'>Step 6: Limit API Access to Specific Clients (Optional)</h2>
 <p>As the API owner, you probably don&#39;t receive overwhelming API requests from everywhere. To avoid this trouble, you could give every client a unique client id, which is going to be used in API endpoints (as the showing syntax in step 4). If no client id is added, this inference job would become public.</p>
-<div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">aibro</span> <span class="kn">import</span> <span class="n">Inference</span>
+<div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">aibro.inference</span> <span class="kn">import</span> <span class="n">Inference</span>
 <span class="n">Inference</span><span class="p">.</span><span class="n">update_clients</span><span class="p">(</span>
     <span class="n">job_id</span><span class="p">,</span>
     <span class="n">add_client_ids</span> <span class="o">=</span> <span class="p">[</span><span class="s">"client_1"</span><span class="p">,</span> <span class="s">"client_2"</span><span class="p">]</span>
 <span class="p">)</span>
 </code></pre></div><h2 id='step-7-complete-job'>Step 7: Complete Job</h2>
 <p>Once the inference job is no longer used, to avoid unnecessary cost, please remember to close it by <code>Inference.complete()</code>.</p>
-<div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">aibro</span> <span class="kn">import</span> <span class="n">Inference</span>
+<div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">aibro.inference</span> <span class="kn">import</span> <span class="n">Inference</span>
 <span class="n">Inference</span><span class="p">.</span><span class="n">complete</span><span class="p">(</span><span class="n">job_id</span><span class="p">)</span>
 </code></pre></div><h1 id='aibro-inference'>aibro.Inference</h1><h2 id='deploy'>deploy()</h2><div class="highlight"><pre class="highlight python tab-python"><code><span class="k">def</span> <span class="nf">deploy</span><span class="p">(</span>
     <span class="n">artifacts_path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">],</span>

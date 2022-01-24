@@ -1,6 +1,6 @@
 # Introduction - AIbro Inference
 
-**AIbro Version**: 1.1.0 <span style="color:blue;">(alpha)</span>
+**AIbro Version**: 1.1.1 <span style="color:blue;">(alpha)</span>
 
 **Last Documentation Update**: Dec. 12, 2021
 
