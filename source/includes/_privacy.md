@@ -1,3 +1,3 @@
 # Data Privacy
 
-AIbro inference only stores the metadata from inference requests for service improvement purposes.
+Each Albro inference stores only the metadata from inference requests. This is done for the purpose of service improvement.

@@ -1,10 +1,10 @@
 # Authentication
 
-Authentication is required when APIs are called for the first time.
+Authentication is required when Aibro APIs are called for the first time.
 
-AIbro allows one of the following two ways to verify authentication:
+Albro allows one of the following two ways to authenticate:
 
-- Access token (**recommend**): a series of characters starts with "secret\_..."; it can be found on the [humming page](https://aipaca.ai/humming).
-- Email & password: same as you register at the AIbro [website](https://aipaca.ai).
+- Access token (**recommend**): This is supplied using a series of characters prefixed by "secret\_...", and can be found in the Aibro Console on the [humming page](https://aipaca.ai/humming).
+- Email & password: These credentials are the same that were used to register on the [AIbro website](https://aipaca.ai).
 
 *ps: "humming" is literally how an alpaca "greets" people*😉

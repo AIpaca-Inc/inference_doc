@@ -2,16 +2,16 @@
 
 **AIbro Version**: 1.1.1 <span style="color:blue;">(alpha)</span>
 
-**Last Documentation Update**: Dec. 12, 2021
+**Last Documentation Update**: Feb. 3, 2022
 
 **Definition**: API embedded python library
 
-AIbro is a serverless MLOps tool that helps data scientists train & inference AI models on cloud platforms in 2 minutes.
+AIbro is a serverless MLOps tool that helps data scientists train & deploy AI models on cloud platforms in 2 minutes.
 
-This document focuses on cloud **inference**. If you are also interested in training, here is the [training document link](https://doc.aipaca.ai/training).
+The first step in the process is training a machine learning model, whereas this document focuses on the second step, cloud-based machine learning inference. If you are also interested in learning about training a model, please refer to the [training document](https://doc.aipaca.ai/training).
 
 ## Why AIbro Inference?
 
-- Reason 1 - cheap: compared to ordinary on-demand instances, AIbro uses [spot](#spot-vs-on-demand-instance) and [standby](#get-more-saving-by-cooling-instance) instances to achieve an average of 70%+ savings.
-- Reason 2 - easy: it only takes you 2 minutes to deploy a machine learning model.
-- Reason 3 - flexible: aibro supports basically all popular model frameworks in the market.
+- Cost-effectiveness. Compared to ordinary on-demand instances, Albro uses [spot](#spot-vs-on-demand-instance) and [standby](#standby-and-cooling-instances) instances to achieve 85% savings.
+- Ease of use. Aibro is easy to use and it only takes two minutes to deploy a machine learning model.
+- Flexibility. Our platform supports virtually all of the popular model frameworks in the market.

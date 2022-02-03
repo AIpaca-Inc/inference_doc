@@ -77,7 +77,7 @@ lunr.utils.warn = (function (global) {
   /* eslint-disable no-console */
   return function (message) {
     if (global.console && console.warn) {
-      console.warn(message)
+      // console.warn(message)
     }
   }
   /* eslint-enable no-console */

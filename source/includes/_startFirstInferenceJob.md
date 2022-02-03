@@ -10,15 +10,17 @@ Play around with the executable Colab tutorial <a href = "https://colab.research
 pip install aibro
 ```
 
-Install [aibro python library](https://pypi.org/project/aibro/) by pip.
+The first step is to install the [Aibro Python library](https://pypi.org/project/aibro/) using `pip`.
 
-If `OSError: protocol not found` shows up, it is caused by missing `/etc/protocols` file. This command should be able to resolve the error: `sudo apt-get -o Dpkg::Options::="--force-confmiss" install --reinstall netbase`
+During the installation, if the `OSError: protocol now found` message appears, then it indicates an error caused by a missing file that can be easily resolved. The missing file is `/etc/protocols`, and entering the following command should remedy it.
 
-## Step 2: Prepare a formatted model repo
+`sudo apt-get -o Dpkg::Options::="--force-confmiss" install --reinstall netbase`
 
-Source: [https://github.com/AIpaca-Inc/AIbro_model_repo](https://github.com/AIpaca-Inc/AIbro_model_repo).
+## Step 2: Prepare repository
 
-The repo should be structured in the following format:
+The second step is to prepare a formatted inference model repository. The following instructions and source code can be found on our GitHub page, [Aibro-examples](https://github.com/AIpaca-Inc/Aibro-examples).
+
+The repo should be structured using the following format:
 
 repo <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;|\_\_&nbsp;[predict.py](#predict-py)<br/>
@@ -29,9 +31,7 @@ repo <br/>
 
 ### **predict.py**
 
-This is the entry point of AIbro.
-
-predict.py should contain two methods:
+This is the entry point that will be called by Aibro. It should contain two methods, `load_model()` and `run(...)`.
 
 #### _load_model()_:
 
@@ -42,9 +42,11 @@ def load_model():
     return translator
 ```
 
-This method should load and return your machine learning model from the "model" folder. A transformer-based Portuguese to English translator is used in this example repo.
+This method is required to load and return your machine learning model from the `model` folder. As an example, a transformer-based Portuguese to English translator is used.
 
 #### _run()_:
+
+This method accepts the model as input. It loads the data from the `data` folder, generates predictions, and returns the results of the inference.
 
 ```python
 def run(model):
@@ -55,10 +57,9 @@ def run(model):
     return result
 ```
 
-This method uses a model as the input, load data from the "data" folder, predict, then return the inference result.
 </br></br></br></br></br></br></br>
 
-_Local test tip_: predict.py() should be able to return an inference result by:
+_test tip_: predict.py() should be able to return an inference result by:
 
 ```python
 run(load_model())
@@ -66,19 +67,21 @@ run(load_model())
 
 ### **'model' and 'data' folders**
 
-There is no format restriction on the "model" and "data" folder as long as the input and output of load_model() and run() from predict.py are correct.
+There are no format restrictions on these two folders, as long as the input and output of `load_model()` and `run(...)` from `predict.py` are correct.
 
 ### **requirement.txt**
 
-Before starting deploying the model, packages from requirement.txt are installed to set up the environment.
+Prior to starting model deployment, packages from `requirement.txt` are installed as part of setting up the environment.
 
-If your requirement.txt contains paths (such as `pandas @ file:///....`), it was an open issue with `pip freeze` in version `20.1`. You could use `pip list --format=freeze > requirements.txt` as a workaround.
+NOTE: If your `requirement.txt` contains paths (such as `pandas @ file:///...`), then it is the subject of an open issue with `pip freeze` in version `20.1`. As a workaround, the following line can be used:
+
+`pip list --format=freeze > requirements.txt`
 
 ### **Other Artifacts**
 
-All other files/folders.
+This refers to all of the other files and folders.
 
-## Step 3: Test the Repo by Dryrun
+## Step 3: Test the Repo using Dryrun
 
 ```python
 from aibro.inference import Inference
@@ -88,7 +91,7 @@ api_url = Inference.deploy(
 )
 ```
 
-Dryrun locally validates the repo structure and tests if inference result can be successfully returned.
+Dryrun locally validates the repo structure and tests to ensure that an inference result can be successfully returned.
 
 ## Step 4: Create an inference API with one-line code
 
@@ -101,30 +104,30 @@ api_url = Inference.deploy(
 )
 ```
 
-Assume the formatted model repo is saved at path "./aibro_repo", we can now use it to create an inference job. The model name should be unique with respect to all current [active inference jobs](https://aipaca.ai/inference_jobs) under your profile.
+Assume the formatted model repo is saved at path `"/aibro_repo"`. It can now be used to create an inference job. The model name must be unique with respect to all current [active inference jobs](https://aipaca.ai/inference_jobs) under your profile.
 
-In this example, we deployed a public custom model from "./aibro_repo" called "my_fancy_transformer" on machine "c5.large.od" and used an access token for authentication.
+In this example, we deploy a public custom model from `"./aibro_repo"` called "my_fancy_transformer" on machine "c5.large.od", using an access token for authentication.
 
-Once the deployment is finished, an API URL is returned with the syntax: </br>
+Once the deployment is complete, an API URL is returned with the syntax: </br>
 
 - **http://api.aipaca.ai/v1/{username}/{client_id}/{model_name}/predict** </br>
 
-**{client_id}**: if your inference job is public, **{client_id}** is filled by "public". Otherwise, **{client_id}** should be filled by one of your [clients' ID](#add-clients).
+**{client_id}**: if your inference job is public, **{client_id}** is simply "public". Otherwise, **{client_id}** will indicate one of your [clients' ID](#add-clients).
 
-In this tutorial, the API URL should look like:
+In this tutorial, the API URL is:
 
 - **http://api.aipaca.ai/v1/{username}/public/my_fancy_transformer/predict** </br>
 
-## Step 5: Test a Aibro API with curl:
+## Step 5: Test an Aibro API with curl:
 
 ```python
 curl -X POST "http://api.aipaca.ai/v1/{username}/public/my_fancy_transformer/predict" -d '{"data": "Olá"}'
 # replace the {username} by your own
 ```
 
-You should feel free to use whatever API tool that you got used to. `curl` is just the one that in our taste.
+In this example, we demonstrate the use of the Aibro API using the `curl` utility. However, feel free to use whatever API tool you feel comfortable with.
 
-The syntax when using `curl` depends on the file type in the `data` folder. In this tutorial, we used the `json` type.
+**Note:** The syntax when using `curl` depends on the file type in the `data` folder. In this tutorial, we use a `JSON` file.
 
 | File Type | syntax                                                                                                   |
 | --------- | -------------------------------------------------------------------------------------------------------- |
@@ -133,19 +136,19 @@ The syntax when using `curl` depends on the file type in the `data` folder. In t
 | csv       | curl -X POST {{api url}} -F file=@'path/to/csv/file'                                                     |
 | others    | curl -X POST {{api url}} -F file=@'path/to/zip/file'                                                     |
 
-You may have observed some patterns from the syntax lookup table above:
+You may have observed some patterns from the syntax lookup table above. The rules are summarized as follows:
 
-- If the file type is `json` or `txt`, you could use `-d` flag to post the string data directly.
-- If the file type is one of `json`, `txt`, or `csv`, you could use `-F` flag to post the data file by path.
-- If the file type is not one of `json`, `txt`, or `csv`, you could zip the entire `data` folder then post the data file by the zip path.
+- If the file type is `JSON` or `TXT`, you can use the `-d` flag to post the string data directly.
+- If the file type is either `JSON`, `TXT`, or `CSV`, you can use the `-F` flag to post the data file, specified by its path.
+- If the file type is something other than `JSON`, `TXT`, or `CSV`, then you have the option of using `ZIP` to archive the entire data folder and post it using its path.
 
-**The posted data will replace everything in the `data` folder. Therefore, your posted data should have the same format as whatever you had in the `data` folder initially.**
+**Important!** The posted data will replace everything in the `data` folder. Therefore, the data that you post should have the same format as what was originally there.
 
-_Tips_: if your inference time is over one minute, it is recommended to either reduce the data size or increase the `--keepalive-time` value when using `curl`.
+_Tips_: If your inference time is more than one minute, we recommend either reducing the data size or increasing the `--keepalive-time` value when using `curl`.
 
 ## Step 6: Limit API Access to Specific Clients (Optional)
 
-As the API owner, you probably don't receive overwhelming API requests from everywhere. To avoid this trouble, you could give every client a unique client id, which is going to be used in API endpoints (as the showing syntax in step 4). If no client id is added, this inference job would become public.
+As the API owner, you have the option of restricting access to specific clients by assigning them a unique ID. This mitigates the risk of receiving an overwhelming number of API requests from different clients. The client ID is included with API endpoints, as shown in step 4. If no client ID is added, this inference job will be public.
 
 ```python
 from aibro.inference import Inference
@@ -157,7 +160,7 @@ Inference.update_clients(
 
 ## Step 7: Complete Job
 
-Once the inference job is no longer used, to avoid unnecessary cost, please remember to close it by `Inference.complete()`.
+Once the inference job is no longer required, to avoid unnecessary costs, please remember to close it with the `Inference.complete()` method.
 
 ```python
 from aibro.inference import Inference
