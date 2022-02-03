@@ -285,7 +285,7 @@
     </style>
     <link href="stylesheets/screen-1d8a2b99.css" rel="stylesheet" media="screen" />
     <link href="stylesheets/print-953e3353.css" rel="stylesheet" media="print" />
-      <script src="javascripts/all-c9c9fd69.js"></script>
+      <script src="javascripts/all-a61cc39a.js"></script>
 
     <script>
       $(function() { setupCodeCopy(); });
@@ -327,7 +327,7 @@
                     <a href="#step-1-install" class="toc-h2 toc-link" data-title="Step 1: Install">Step 1: Install</a>
                   </li>
                   <li>
-                    <a href="#step-2-prepare-a-formatted-model-repo" class="toc-h2 toc-link" data-title="Step 2: Prepare a formatted model repo">Step 2: Prepare a formatted model repo</a>
+                    <a href="#step-2-prepare-repository" class="toc-h2 toc-link" data-title="Step 2: Prepare repository">Step 2: Prepare repository</a>
                       <ul class="toc-list-h3">
                           <li>
                             <a href="#predict-py" class="toc-h3 toc-link" data-title="<strong>predict.py</strong>"><strong>predict.py</strong></a>
@@ -352,13 +352,13 @@
                       </ul>
                   </li>
                   <li>
-                    <a href="#step-3-test-the-repo-by-dryrun" class="toc-h2 toc-link" data-title="Step 3: Test the Repo by Dryrun">Step 3: Test the Repo by Dryrun</a>
+                    <a href="#step-3-test-the-repo-using-dryrun" class="toc-h2 toc-link" data-title="Step 3: Test the Repo using Dryrun">Step 3: Test the Repo using Dryrun</a>
                   </li>
                   <li>
                     <a href="#step-4-create-an-inference-api-with-one-line-code" class="toc-h2 toc-link" data-title="Step 4: Create an inference API with one-line code">Step 4: Create an inference API with one-line code</a>
                   </li>
                   <li>
-                    <a href="#step-5-test-a-aibro-api-with-curl" class="toc-h2 toc-link" data-title="Step 5: Test a Aibro API with curl:">Step 5: Test a Aibro API with curl:</a>
+                    <a href="#step-5-test-an-aibro-api-with-curl" class="toc-h2 toc-link" data-title="Step 5: Test an Aibro API with curl:">Step 5: Test an Aibro API with curl:</a>
                   </li>
                   <li>
                     <a href="#step-6-limit-api-access-to-specific-clients-optional" class="toc-h2 toc-link" data-title="Step 6: Limit API Access to Specific Clients (Optional)">Step 6: Limit API Access to Specific Clients (Optional)</a>
@@ -369,7 +369,7 @@
               </ul>
           </li>
           <li>
-            <a href="#aibro-inference" class="toc-h1 toc-link" data-title="aibro.Inference">aibro.Inference</a>
+            <a href="#aibro-inference-methods" class="toc-h1 toc-link" data-title="aibro.Inference Methods">aibro.Inference Methods</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#deploy" class="toc-h2 toc-link" data-title="deploy()">deploy()</a>
@@ -582,27 +582,27 @@ This endpoint deletes a specific kitten.
 <h1 id='introduction-aibro-inference'>Introduction - AIbro Inference</h1>
 <p><strong>AIbro Version</strong>: 1.1.1 <span style="color:blue;">(alpha)</span></p>
 
-<p><strong>Last Documentation Update</strong>: Dec. 12, 2021</p>
+<p><strong>Last Documentation Update</strong>: Feb. 3, 2022</p>
 
 <p><strong>Definition</strong>: API embedded python library</p>
 
-<p>AIbro is a serverless MLOps tool that helps data scientists train &amp; inference AI models on cloud platforms in 2 minutes.</p>
+<p>AIbro is a serverless MLOps tool that helps data scientists train &amp; deploy AI models on cloud platforms in 2 minutes.</p>
 
-<p>This document focuses on cloud <strong>inference</strong>. If you are also interested in training, here is the <a href="https://doc.aipaca.ai/training">training document link</a>.</p>
+<p>The first step in the process is training a machine learning model, whereas this document focuses on the second step, cloud-based machine learning inference. If you are also interested in learning about training a model, please refer to the <a href="https://doc.aipaca.ai/training">training document</a>.</p>
 <h2 id='why-aibro-inference'>Why AIbro Inference?</h2>
 <ul>
-<li>Reason 1 - cheap: compared to ordinary on-demand instances, AIbro uses <a href="#spot-vs-on-demand-instance">spot</a> and <a href="#get-more-saving-by-cooling-instance">standby</a> instances to achieve an average of 70%+ savings.</li>
-<li>Reason 2 - easy: it only takes you 2 minutes to deploy a machine learning model.</li>
-<li>Reason 3 - flexible: aibro supports basically all popular model frameworks in the market.</li>
+<li>Cost-effectiveness. Compared to ordinary on-demand instances, Albro uses <a href="#spot-vs-on-demand-instance">spot</a> and <a href="#standby-and-cooling-instances">standby</a> instances to achieve 85% savings.</li>
+<li>Ease of use. Aibro is easy to use and it only takes two minutes to deploy a machine learning model.</li>
+<li>Flexibility. Our platform supports virtually all of the popular model frameworks in the market.</li>
 </ul>
 <h1 id='authentication'>Authentication</h1>
-<p>Authentication is required when APIs are called for the first time.</p>
+<p>Authentication is required when Aibro APIs are called for the first time.</p>
 
-<p>AIbro allows one of the following two ways to verify authentication:</p>
+<p>Albro allows one of the following two ways to authenticate:</p>
 
 <ul>
-<li>Access token (<strong>recommend</strong>): a series of characters starts with &quot;secret_...&quot;; it can be found on the <a href="https://aipaca.ai/humming">humming page</a>.</li>
-<li>Email &amp; password: same as you register at the AIbro <a href="https://aipaca.ai">website</a>.</li>
+<li>Access token (<strong>recommend</strong>): This is supplied using a series of characters prefixed by &quot;secret_...&quot;, and can be found in the Aibro Console on the <a href="https://aipaca.ai/humming">humming page</a>.</li>
+<li>Email &amp; password: These credentials are the same that were used to register on the <a href="https://aipaca.ai">AIbro website</a>.</li>
 </ul>
 
 <p><em>ps: &quot;humming&quot; is literally how an alpaca &quot;greets&quot; people</em>😉</p>
@@ -612,13 +612,15 @@ Play around with the executable Colab tutorial <a href = "https://colab.research
 </aside>
 <h2 id='step-1-install'>Step 1: Install</h2><div class="highlight"><pre class="highlight python tab-python"><code><span class="n">pip</span> <span class="n">install</span> <span class="n">aibro</span>
 </code></pre></div>
-<p>Install <a href="https://pypi.org/project/aibro/">aibro python library</a> by pip.</p>
+<p>The first step is to install the <a href="https://pypi.org/project/aibro/">Aibro Python library</a> using <code>pip</code>.</p>
 
-<p>If <code>OSError: protocol not found</code> shows up, it is caused by missing <code>/etc/protocols</code> file. This command should be able to resolve the error: <code>sudo apt-get -o Dpkg::Options::=&quot;--force-confmiss&quot; install --reinstall netbase</code></p>
-<h2 id='step-2-prepare-a-formatted-model-repo'>Step 2: Prepare a formatted model repo</h2>
-<p>Source: <a href="https://github.com/AIpaca-Inc/Aibro-examples">https://github.com/AIpaca-Inc/Aibro-examples</a>.</p>
+<p>During the installation, if the <code>OSError: protocol now found</code> message appears, then it indicates an error caused by a missing file that can be easily resolved. The missing file is <code>/etc/protocols</code>, and entering the following command should remedy it.</p>
 
-<p>The repo should be structured in the following format:</p>
+<p><code>sudo apt-get -o Dpkg::Options::=&quot;--force-confmiss&quot; install --reinstall netbase</code></p>
+<h2 id='step-2-prepare-repository'>Step 2: Prepare repository</h2>
+<p>The second step is to prepare a formatted inference model repository. The following instructions and source code can be found on our GitHub page, <a href="https://github.com/AIpaca-Inc/Aibro-examples">Aibro-examples</a>.</p>
+
+<p>The repo should be structured using the following format:</p>
 
 <p>repo <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;|__&nbsp;<a href="#predict-py">predict.py</a><br/>
@@ -627,42 +629,43 @@ Play around with the executable Colab tutorial <a href = "https://colab.research
 &nbsp;&nbsp;&nbsp;&nbsp;|__&nbsp;<a href="#requirement-txt">requirement.txt</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;|__&nbsp;<a href="#other-artifacts">other artifacts</a><br/></p>
 <h3 id='predict-py'><strong>predict.py</strong></h3>
-<p>This is the entry point of AIbro.</p>
-
-<p>predict.py should contain two methods:</p>
+<p>This is the entry point that will be called by Aibro. It should contain two methods, <code>load_model()</code> and <code>run(...)</code>.</p>
 <h4 id='load_model'><em>load_model()</em>:</h4><div class="highlight"><pre class="highlight python tab-python"><code><span class="k">def</span> <span class="nf">load_model</span><span class="p">():</span>
     <span class="c1"># Portuguese to English translator
 </span>    <span class="n">translator</span> <span class="o">=</span> <span class="n">tf</span><span class="p">.</span><span class="n">saved_model</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="s">'model'</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">translator</span>
 </code></pre></div>
-<p>This method should load and return your machine learning model from the &quot;model&quot; folder. A transformer-based Portuguese to English translator is used in this example repo.</p>
-<h4 id='run'><em>run()</em>:</h4><div class="highlight"><pre class="highlight python tab-python"><code><span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">model</span><span class="p">):</span>
+<p>This method is required to load and return your machine learning model from the <code>model</code> folder. As an example, a transformer-based Portuguese to English translator is used.</p>
+<h4 id='run'><em>run()</em>:</h4>
+<p>This method accepts the model as input. It loads the data from the <code>data</code> folder, generates predictions, and returns the results of the inference.</p>
+<div class="highlight"><pre class="highlight python tab-python"><code><span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">model</span><span class="p">):</span>
     <span class="n">fp</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">"./data/data.json"</span><span class="p">,</span> <span class="s">"r"</span><span class="p">)</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
     <span class="n">sentence</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">"data"</span><span class="p">]</span>
     <span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="s">"data"</span><span class="p">:</span> <span class="n">model</span><span class="p">(</span><span class="n">sentence</span><span class="p">).</span><span class="n">numpy</span><span class="p">().</span><span class="n">decode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">)}</span>
     <span class="k">return</span> <span class="n">result</span>
 </code></pre></div>
-<p>This method uses a model as the input, load data from the &quot;data&quot; folder, predict, then return the inference result.
-</br></br></br></br></br></br></br></p>
+<p></br></br></br></br></br></br></br></p>
 
-<p><em>Local test tip</em>: predict.py() should be able to return an inference result by:</p>
+<p><em>test tip</em>: predict.py() should be able to return an inference result by:</p>
 <div class="highlight"><pre class="highlight python tab-python"><code><span class="n">run</span><span class="p">(</span><span class="n">load_model</span><span class="p">())</span>
 </code></pre></div><h3 id='39-model-39-and-39-data-39-folders'><strong>&#39;model&#39; and &#39;data&#39; folders</strong></h3>
-<p>There is no format restriction on the &quot;model&quot; and &quot;data&quot; folder as long as the input and output of load_model() and run() from predict.py are correct.</p>
+<p>There are no format restrictions on these two folders, as long as the input and output of <code>load_model()</code> and <code>run(...)</code> from <code>predict.py</code> are correct.</p>
 <h3 id='requirement-txt'><strong>requirement.txt</strong></h3>
-<p>Before starting deploying the model, packages from requirement.txt are installed to set up the environment.</p>
+<p>Prior to starting model deployment, packages from <code>requirement.txt</code> are installed as part of setting up the environment.</p>
 
-<p>If your requirement.txt contains paths (such as <code>pandas @ file:///....</code>), it was an open issue with <code>pip freeze</code> in version <code>20.1</code>. You could use <code>pip list --format=freeze &gt; requirements.txt</code> as a workaround.</p>
+<p>NOTE: If your <code>requirement.txt</code> contains paths (such as <code>pandas @ file:///...</code>), then it is the subject of an open issue with <code>pip freeze</code> in version <code>20.1</code>. As a workaround, the following line can be used:</p>
+
+<p><code>pip list --format=freeze &gt; requirements.txt</code></p>
 <h3 id='other-artifacts'><strong>Other Artifacts</strong></h3>
-<p>All other files/folders.</p>
-<h2 id='step-3-test-the-repo-by-dryrun'>Step 3: Test the Repo by Dryrun</h2><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">aibro.inference</span> <span class="kn">import</span> <span class="n">Inference</span>
+<p>This refers to all of the other files and folders.</p>
+<h2 id='step-3-test-the-repo-using-dryrun'>Step 3: Test the Repo using Dryrun</h2><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">aibro.inference</span> <span class="kn">import</span> <span class="n">Inference</span>
 <span class="n">api_url</span> <span class="o">=</span> <span class="n">Inference</span><span class="p">.</span><span class="n">deploy</span><span class="p">(</span>
     <span class="n">artifacts_path</span> <span class="o">=</span> <span class="s">"./aibro_repo"</span><span class="p">,</span>
     <span class="n">dryrun</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span>
 <span class="p">)</span>
 </code></pre></div>
-<p>Dryrun locally validates the repo structure and tests if inference result can be successfully returned.</p>
+<p>Dryrun locally validates the repo structure and tests to ensure that an inference result can be successfully returned.</p>
 <h2 id='step-4-create-an-inference-api-with-one-line-code'>Step 4: Create an inference API with one-line code</h2><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">aibro.inference</span> <span class="kn">import</span> <span class="n">Inference</span>
 <span class="n">api_url</span> <span class="o">=</span> <span class="n">Inference</span><span class="p">.</span><span class="n">deploy</span><span class="p">(</span>
     <span class="n">model_name</span> <span class="o">=</span> <span class="s">"my_fancy_transformer"</span><span class="p">,</span>
@@ -670,29 +673,29 @@ Play around with the executable Colab tutorial <a href = "https://colab.research
     <span class="n">artifacts_path</span> <span class="o">=</span> <span class="s">"./aibro_repo"</span><span class="p">,</span>
 <span class="p">)</span>
 </code></pre></div>
-<p>Assume the formatted model repo is saved at path &quot;./aibro_repo&quot;, we can now use it to create an inference job. The model name should be unique with respect to all current <a href="https://aipaca.ai/inference_jobs">active inference jobs</a> under your profile.</p>
+<p>Assume the formatted model repo is saved at path <code>&quot;/aibro_repo&quot;</code>. It can now be used to create an inference job. The model name must be unique with respect to all current <a href="https://aipaca.ai/inference_jobs">active inference jobs</a> under your profile.</p>
 
-<p>In this example, we deployed a public custom model from &quot;./aibro_repo&quot; called &quot;my_fancy_transformer&quot; on machine &quot;c5.large.od&quot; and used an access token for authentication.</p>
+<p>In this example, we deploy a public custom model from <code>&quot;./aibro_repo&quot;</code> called &quot;my_fancy_transformer&quot; on machine &quot;c5.large.od&quot;, using an access token for authentication.</p>
 
-<p>Once the deployment is finished, an API URL is returned with the syntax: </br></p>
+<p>Once the deployment is complete, an API URL is returned with the syntax: </br></p>
 
 <ul>
 <li><strong>http://api.aipaca.ai/v1/{username}/{client_id}/{model_name}/predict</strong> </br></li>
 </ul>
 
-<p><strong>{client_id}</strong>: if your inference job is public, <strong>{client_id}</strong> is filled by &quot;public&quot;. Otherwise, <strong>{client_id}</strong> should be filled by one of your <a href="#add-clients">clients&#39; ID</a>.</p>
+<p><strong>{client_id}</strong>: if your inference job is public, <strong>{client_id}</strong> is simply &quot;public&quot;. Otherwise, <strong>{client_id}</strong> will indicate one of your <a href="#add-clients">clients&#39; ID</a>.</p>
 
-<p>In this tutorial, the API URL should look like:</p>
+<p>In this tutorial, the API URL is:</p>
 
 <ul>
 <li><strong>http://api.aipaca.ai/v1/{username}/public/my_fancy_transformer/predict</strong> </br></li>
 </ul>
-<h2 id='step-5-test-a-aibro-api-with-curl'>Step 5: Test a Aibro API with curl:</h2><div class="highlight"><pre class="highlight python tab-python"><code><span class="n">curl</span> <span class="o">-</span><span class="n">X</span> <span class="n">POST</span> <span class="s">"http://api.aipaca.ai/v1/{username}/public/my_fancy_transformer/predict"</span> <span class="o">-</span><span class="n">d</span> <span class="s">'{"data": "Olá"}'</span>
+<h2 id='step-5-test-an-aibro-api-with-curl'>Step 5: Test an Aibro API with curl:</h2><div class="highlight"><pre class="highlight python tab-python"><code><span class="n">curl</span> <span class="o">-</span><span class="n">X</span> <span class="n">POST</span> <span class="s">"http://api.aipaca.ai/v1/{username}/public/my_fancy_transformer/predict"</span> <span class="o">-</span><span class="n">d</span> <span class="s">'{"data": "Olá"}'</span>
 <span class="c1"># replace the {username} by your own
 </span></code></pre></div>
-<p>You should feel free to use whatever API tool that you got used to. <code>curl</code> is just the one that in our taste.</p>
+<p>In this example, we demonstrate the use of the Aibro API using the <code>curl</code> utility. However, feel free to use whatever API tool you feel comfortable with.</p>
 
-<p>The syntax when using <code>curl</code> depends on the file type in the <code>data</code> folder. In this tutorial, we used the <code>json</code> type.</p>
+<p><strong>Note:</strong> The syntax when using <code>curl</code> depends on the file type in the <code>data</code> folder. In this tutorial, we use a <code>JSON</code> file.</p>
 
 <table><thead>
 <tr>
@@ -718,29 +721,29 @@ Play around with the executable Colab tutorial <a href = "https://colab.research
 </tr>
 </tbody></table>
 
-<p>You may have observed some patterns from the syntax lookup table above:</p>
+<p>You may have observed some patterns from the syntax lookup table above. The rules are summarized as follows:</p>
 
 <ul>
-<li>If the file type is <code>json</code> or <code>txt</code>, you could use <code>-d</code> flag to post the string data directly.</li>
-<li>If the file type is one of <code>json</code>, <code>txt</code>, or <code>csv</code>, you could use <code>-F</code> flag to post the data file by path.</li>
-<li>If the file type is not one of <code>json</code>, <code>txt</code>, or <code>csv</code>, you could zip the entire <code>data</code> folder then post the data file by the zip path.</li>
+<li>If the file type is <code>JSON</code> or <code>TXT</code>, you can use the <code>-d</code> flag to post the string data directly.</li>
+<li>If the file type is either <code>JSON</code>, <code>TXT</code>, or <code>CSV</code>, you can use the <code>-F</code> flag to post the data file, specified by its path.</li>
+<li>If the file type is something other than <code>JSON</code>, <code>TXT</code>, or <code>CSV</code>, then you have the option of using <code>ZIP</code> to archive the entire data folder and post it using its path.</li>
 </ul>
 
-<p><strong>The posted data will replace everything in the <code>data</code> folder. Therefore, your posted data should have the same format as whatever you had in the <code>data</code> folder initially.</strong></p>
+<p><strong>Important!</strong> The posted data will replace everything in the <code>data</code> folder. Therefore, the data that you post should have the same format as what was originally there.</p>
 
-<p><em>Tips</em>: if your inference time is over one minute, it is recommended to either reduce the data size or increase the <code>--keepalive-time</code> value when using <code>curl</code>.</p>
+<p><em>Tips</em>: If your inference time is more than one minute, we recommend either reducing the data size or increasing the <code>--keepalive-time</code> value when using <code>curl</code>.</p>
 <h2 id='step-6-limit-api-access-to-specific-clients-optional'>Step 6: Limit API Access to Specific Clients (Optional)</h2>
-<p>As the API owner, you probably don&#39;t receive overwhelming API requests from everywhere. To avoid this trouble, you could give every client a unique client id, which is going to be used in API endpoints (as the showing syntax in step 4). If no client id is added, this inference job would become public.</p>
+<p>As the API owner, you have the option of restricting access to specific clients by assigning them a unique ID. This mitigates the risk of receiving an overwhelming number of API requests from different clients. The client ID is included with API endpoints, as shown in step 4. If no client ID is added, this inference job will be public.</p>
 <div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">aibro.inference</span> <span class="kn">import</span> <span class="n">Inference</span>
 <span class="n">Inference</span><span class="p">.</span><span class="n">update_clients</span><span class="p">(</span>
     <span class="n">job_id</span><span class="p">,</span>
     <span class="n">add_client_ids</span> <span class="o">=</span> <span class="p">[</span><span class="s">"client_1"</span><span class="p">,</span> <span class="s">"client_2"</span><span class="p">]</span>
 <span class="p">)</span>
 </code></pre></div><h2 id='step-7-complete-job'>Step 7: Complete Job</h2>
-<p>Once the inference job is no longer used, to avoid unnecessary cost, please remember to close it by <code>Inference.complete()</code>.</p>
+<p>Once the inference job is no longer required, to avoid unnecessary costs, please remember to close it with the <code>Inference.complete()</code> method.</p>
 <div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">aibro.inference</span> <span class="kn">import</span> <span class="n">Inference</span>
 <span class="n">Inference</span><span class="p">.</span><span class="n">complete</span><span class="p">(</span><span class="n">job_id</span><span class="p">)</span>
-</code></pre></div><h1 id='aibro-inference'>aibro.Inference</h1><h2 id='deploy'>deploy()</h2><div class="highlight"><pre class="highlight python tab-python"><code><span class="k">def</span> <span class="nf">deploy</span><span class="p">(</span>
+</code></pre></div><h1 id='aibro-inference-methods'>aibro.Inference Methods</h1><h2 id='deploy'>deploy()</h2><div class="highlight"><pre class="highlight python tab-python"><code><span class="k">def</span> <span class="nf">deploy</span><span class="p">(</span>
     <span class="n">artifacts_path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">],</span>
     <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span>
     <span class="n">machine_id_config</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span>
@@ -752,10 +755,10 @@ Play around with the executable Colab tutorial <a href = "https://colab.research
     <span class="n">wait_request_s</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 </code></pre></div>
-<p>This method starts an inference job to deploy models on cloud instances.</p>
+<p>The <code>deploy()</code> method starts an inference job, deploying models on cloud instances.</p>
 <h3 id='parameters'>Parameters</h3>
 <p><strong>artifacts_path</strong>: <em>Union[str, list]</em> <br/>
-The path to the formatted repo. The input type can be either string or dictionary:</p>
+The path to the formatted repository. The input type can be either of type <strong>string</strong> or <strong>list</strong>:</p>
 
 <table><thead>
 <tr>
@@ -772,15 +775,22 @@ The path to the formatted repo. The input type can be either string or dictionar
 <tr>
 <td>list</td>
 <td><code>[&quot;./path/to/model&quot;,</code><br/> <code>&quot;./path/to/predict.py&quot;,</code><br/> <code>&quot;./path/to/data&quot;,</code><br/> <code>&quot;./path/to/requirements.txt&quot;,</code><br/> <code>&quot;./path/to/other_artifacts&quot;]</code></td>
-<td>Select important artifacts one-by-one. AIbro would combine and recreate a model repo called <code>aibro_repo</code> under the root path of aibro library</td>
+<td>Select important artifacts one-by-one. Aibro will combine and recreate a model repository called <code>aibro_repo</code> under the root path of aibro library</td>
 </tr>
 </tbody></table>
 
 <p><strong>model_name</strong>: <em>str</em> = None <br/>
-The model name used in the deployed inference job. It could only be None iff <code>dryun==False</code>. In the scope of user profile, the model name should be unique with respect to the model names from all active inference jobs.</p>
+This parameter specifies the model name used in the deployed inference job. It can only be set to None if, and only if dryrun is set to <code>False</code>. Within the scope of the user profile, the model name should be unique with respect to those among the active inference jobs.</p>
 
 <p><strong>machine_id_config</strong>: <em>Union[str, dict]</em> <br/>
-The machine configuration used to deploy the model. It could only be None iff <code>dryun==False</code>. The input type can be either string or dictionary:</p>
+This parameter specifies the machine configuration to be used to deploy the model. In the configuration, machines are categorized as either <strong>Standby</strong> or <strong>Cooling</strong>.</p>
+
+<ul>
+<li>A <strong>Standby</strong> instance is one that never turns off.</li>
+<li>A <strong>Cooling</strong> instance is one that only turns on when it receives a new inference request, and only turns off when no inference request is received within <code>cool_down_period_s</code> seconds.</li>
+</ul>
+
+<p>The macine_id_config can be set to <code>None</code> if and only <code>dryrun</code> is set to <code>False</code>. The input type can be either a string or a dictionary:</p>
 
 <table><thead>
 <tr>
@@ -813,32 +823,27 @@ The machine configuration used to deploy the model. It could only be None iff <c
 <li><u>One standby instance is mandatory whereas cooling instance is optional (e.g. syntax such as {&quot;cooling&quot;: &quot;g4dn.4xlarge.od&quot;} is invalid).</u></li>
 </ol>
 
-<p>In the configuration, machines are categorized into &quot;Standby&quot; and &quot;Cooling&quot;. In general, their definitions are below:</p>
-
-<ul>
-<li>Standby instance: the instance never turns off.</li>
-<li>Cooling instance: the instance only turns on when receiving a new inference request and only turns off when no inference request is received within <code>cool_down_period_s</code> seconds.</li>
-</ul>
-
-<p>For more details about the usage of standby and cooling instances, check out the <a href="#standby-and-cooling-instances">section below</a>.</p>
+<p><strong>For more details about the usage of standby and cooling instances, check out the <a href="#standby-and-cooling-instances">section below</a>.</strong></p>
 
 <aside class="notice">
-<span style="font-weight: bold">FAQ: Why machine_id_config only accept on-demand instances? Isn't it more expensive than the spot?</span> <br/>
+<span style="font-weight: bold">FAQ: Why does `machine_id_config` only accept on-demand instances? Isn't it more expensive than using a spot instance?</span> <br/>
 
-Answer: spot instance is not always available, using on-demand instance is to ensure that the inference job can always get a server. If spot instances are available, AIbro automatically replaces its same-type on-demand instances to save your cost.
+Answer: Spot instances are not always available, so on-demand instances are required in order to guarantee that the job can always get a server. If spot instances are available, Albro automatically replaces its same-type on-demand instances to operate more cost-effectively.
 
 </aside>
 
 <p><strong>dryrun</strong>: <em>bool = False</em><br/>
-The argument used to test model repo locally. If <code>dryrun==True</code>, <code>deploy()</code> would start validating the repo structure and testing if the inference result can be successfully returned.</p>
+The <code>dryrun</code> option is used to perform a local test of the model. When set to <code>True</code>, the <code>deploy()</code> method will validate the structure of the repository and test whether the inference result can be successfully returned.</p>
 
 <p><strong>cool_down_period_s</strong>: <em>int = 600</em><br/>
-The cool down period of cooling instance. By default, the cooling instance would stop once there is no new inference request coming within 600 seconds.</p>
+This parameter specifies the cool-down period of a cooling instance. By default, the cooling instance will stop after there have been no new inference requests for 600 seconds (10 minutes).</p>
 
 <p><strong>client_ids</strong>: <em>List[str] = []</em><br/>
-The argument used to restrict specific clients to access to your inference API. The client ids can be customized in any syntax as long as there is no duplication. If there is no client id, the inference job becomes public. <code>Inference.update_clients()</code> can be used to add/remove client ids. <br/>
-As mentioned in the <a href="#step-3-create-an-inference-api-with-one-line-code">tutorial</a>, client id is used as a part of the API URL. <br/>
-The table below clarifies the definitions of roles.</p>
+This argument is used to restrict access to your inference API, for use only by specific clients. The client IDs can be customized in any syntax, provided that there is no duplication. If there are no client IDs specified then the inference job is public.</p>
+
+<p>The <code>Inference.update_clients()</code> method can be used to add/remove client IDs. As mentioned in the tutorial, the client ID is used as a part of the API URL.</p>
+
+<p>The table below defines each role.</p>
 
 <table><thead>
 <tr>
@@ -848,38 +853,38 @@ The table below clarifies the definitions of roles.</p>
 </thead><tbody>
 <tr>
 <td>API owner</td>
-<td>People who created the inference API</td>
+<td>The person that created the inference</td>
 </tr>
 <tr>
 <td>API client</td>
-<td>People who have the access to an inference API</td>
+<td>Individuals that have access to the inference</td>
 </tr>
 </tbody></table>
 
 <p><strong>access_token</strong>: <em>str</em> = None <br/>
-The access token used in <a href="#authentication">authentication</a>. If its value is None, email and password would be required to input.</p>
+The access token is used to <a href="#authentication">authenticate</a> the API request. If its value is <code>None</code>, the client’s email and password are required for the request to be accepted.</p>
 
 <p><strong>description</strong>: <em>str</em> = &quot;&quot; <br/>
-The description used to remind which inference job was which.</p>
+The description is used to briefly explain the inference, allowing users to better distinguish them.</p>
 
 <p><strong>wait_request_s</strong>: <em>int = 30</em><br/>
-The time in seconds used to wait for instance requests to be fulfilled.</p>
+This parameter specifies the number of seconds that Aibro will wait for instance requests to be fulfilled.</p>
 <h2 id='complete'>complete()</h2><div class="highlight"><pre class="highlight python tab-python"><code><span class="k">def</span> <span class="nf">complete</span><span class="p">(</span>
     <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span>
     <span class="n">job_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span>
     <span class="n">access_token</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span>
 <span class="p">):</span>
 </code></pre></div>
-<p>Completing an inference job shuts down all instances and stops its API services.</p>
+<p>The <code>complete()</code> method signals the end of an inference, shutting down all of its API services.</p>
 <h3 id='parameters-2'>Parameters</h3>
 <p><strong>model_name</strong>: <em>str</em> = None <br/>
-The model name used in the deployed inference job. Since a model name is required to be unique, it can be used to search which job to complete. You may only need to input either <code>model_name</code> or <code>job_id</code>. If both parameters have input, <code>job_id</code> would be used to search inference jobs.</p>
+This parameter is used to identify the inference job to be stopped. Since a model name is required to be unique, it can be used instead of the <code>job_id</code> to locate it. If values for both <code>model_name</code> and <code>job_id</code> are specified then the <code>job_id</code> will be used for the search.</p>
 
 <p><strong>job_id</strong>: <em>str</em> = None <br/>
-The job_id of the deployed inference job. You may only need to input either <code>model_name</code> or <code>job_id</code>. If both parameters have input, <code>job_id</code> would be used to search inference jobs.</p>
+This identifies the deployed inference job using the job ID. Specifying an ID will cause the <code>model_name</code> parameter to be ignored.</p>
 
 <p><strong>access_token</strong>: <em>str</em> = None <br/>
-The access token used in <a href="#authentication">authentication</a>. If its value is None, email and password would be required to input.</p>
+The access token is used to <a href="#authentication">authenticate</a> the API request. If its value is None, the client’s email and password are required for the request to be accepted.</p>
 <h2 id='update_clients'>update_clients()</h2><div class="highlight"><pre class="highlight python tab-python"><code><span class="k">def</span> <span class="nf">update_clients</span><span class="p">(</span>
         <span class="n">add_client_ids</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[],</span>
         <span class="n">remove_client_ids</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[],</span>
@@ -889,56 +894,66 @@ The access token used in <a href="#authentication">authentication</a>. If its va
         <span class="n">access_token</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span>
     <span class="p">)</span><span class="o">-&gt;</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
 </code></pre></div>
-<p>Update the client ids of the targeted inference job.</p>
+<p>The <code>update_clients()</code> method is used to modify the list of authorized client IDs for the inference job.</p>
 <h3 id='parameters-3'>Parameters</h3>
 <p><strong>add_client_ids</strong>: <em>Union[str, List[str]]</em> = [] <br/>
-The argument used to add one single or one list of client ids. If duplicated client ids are found, the update would be canceled.</p>
+This parameter will add a single client ID, or a list of client IDs. If the duplicate IDs are found within the list or have already been authorized then the update will be canceled.</p>
 
 <p><strong>remove_client_ids</strong>: <em>Union[str, List[str]]</em> = [] <br/>
-The argument used to remove one single or one list of client ids. Client ids that are not found would be ignored.</p>
+This parameter will remove a single client ID or a list of client IDs from the set of authorized clients. IDs that are not found will be ignored.</p>
 
 <p><strong>be_public</strong>: <em>bool</em> = False <br/>
-If the argument is set <code>True</code>, it removes all client ids and the inference job becomes public.</p>
+Setting the <code>be_public</code> parameter to <code>True</code> removes all of the client IDs from the access list, leaving the inference job accessible to all.</p>
 
 <p><strong>model_name</strong>: <em>str</em> = None <br/>
-The model name used in the deployed inference job. Since a model name is required to be unique, it can be used to search the targeted inference job. You may only need to input either <code>model_name</code> or <code>job_id</code>. If both parameters have input, <code>job_id</code> would be used to search inference jobs.</p>
+This parameter is used to identify the model within the inference job. Since a model name is required to be unique, it can be used instead of the <code>job_id</code> to locate it. If values for both <code>model_name</code> and <code>job_id</code> are specified then the <code>job_id</code> will be used for the search.</p>
 
 <p><strong>job_id</strong>: <em>str</em> = None <br/>
-The job_id of the deployed inference job. You may only need to input either <code>model_name</code> or <code>job_id</code>. If both parameters have input, <code>job_id</code> would be used to search inference jobs.</p>
+This identifies the deployed inference job using the job ID. Specifying an ID will cause the <code>model_name</code> parameter to be ignored.</p>
 
 <p><strong>access_token</strong>: <em>str</em> = None <br/>
-The access token used in <a href="#authentication">authentication</a>. If its value is None, email and password would be required to input.</p>
+The access token is used to <a href="#authentication">authenticate</a> the API request. If its value is <code>None</code>, the client’s email and password are required for the request to be accepted.</p>
 <h2 id='list_clients'>list_clients()</h2><div class="highlight"><pre class="highlight python tab-python"><code><span class="k">def</span> <span class="nf">list_clients</span><span class="p">(</span>
     <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span>
     <span class="n">job_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span>
     <span class="n">access_token</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span>
 <span class="p">)</span><span class="o">-&gt;</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
 </code></pre></div>
-<p>Return a list of client ids of the targeted inference job.</p>
+<p>The <code>list_clients()</code> method returns a list of client IDs for a specific inference job.</p>
 <h3 id='parameters-4'>Parameters</h3>
 <p><strong>model_name</strong>: <em>str</em> = None <br/>
-The model name used in the deployed inference job. Since a model name is required to be unique, it can be used to search the targeted inference job. You may only need to input either <code>model_name</code> or <code>job_id</code>. If both parameters have input, <code>job_id</code> would be used to search inference jobs.</p>
+This parameter is used to identify the model within the inference job. Since a model name is required to be unique, it can be used instead of the <code>job_id</code> to locate it. If values for both <code>model_name</code> and <code>job_id</code> are specified then the job_id will be used for the search.</p>
 
 <p><strong>job_id</strong>: <em>str</em> = None <br/>
-The job_id of the deployed inference job. You may only need to input either <code>model_name</code> or <code>job_id</code>. If both parameters have input, <code>job_id</code> would be used to search inference jobs.</p>
+This identifies the deployed inference job using the job ID. Specifying an ID will cause the <code>model_name</code> parameter to be ignored.</p>
 
 <p><strong>access_token</strong>: <em>str</em> = None <br/>
-The access token used in <a href="#authentication">authentication</a>. If its value is None, email and password would be required to input.</p>
+The access token is used to <a href="#authentication">authenticate</a> the API request. If its value is <code>None</code>, the client’s email and password are required for the request to be accepted.</p>
 <h2 id='standby-and-cooling-instances'>Standby and Cooling instances</h2><h3 id='definitions'>Definitions:</h3>
+<p>Instances are classified in one of two ways; <strong>Standby</strong> or <strong>Cooling</strong>.</p>
+
 <ul>
-<li>Standby instance: the instance never turns off.</li>
-<li>Cooling instance: the instance only turns on when receiving a new inference request and only turns off when no inference request is received within <code>cool_down_period_s</code> seconds.</li>
+<li>A <strong>Standby</strong> instance is one that never turns off.</li>
+<li>A <strong>Cooling</strong> instance is one that only turns on when it receives a new inference request, and only turns off when no inference request is received within <code>cool_down_period_s</code> seconds.</li>
 </ul>
 
 <p>If both standby and cooling instances are turned on, the cooling instance would have a higher priority to handle upcoming inference requests.</p>
 <h3 id='configure-for-non-uniform-traffic'>Configure for non-uniform traffic</h3>
-<p>In simple words, the combination of standby and cooling instance configuration is a cross-instance scaling strategy. Let&#39;s say you want to build an inference API for a web application. The call frequency is proportional to the site traffic, which is usually non-uniform (e.g. more traffic during the day and a few during the night). To take the advantage of the configuration, you may set a CPU or cheaper GPU instance as the standby instance and set a powerful GPU instance as the cooling instance. In this way, the powerful cooling instance would efficiently handle intensive traffic during the day and the standby instance would save your money during the night and still keep the near real-time performance.</p>
+<p>Dealing with non-uniform traffic and having the ability to scale are important features of the system, and it is helpful to understand how sporadic and non-uniform traffic can affect your strategy. In simple words, the combination of standby and cooling instances, properly configured, will lead you toward optimal pricing for your usage.</p>
+
+<p>Consider that you have an inference API for a web application and the call frequency is proportional to the site traffic. If the traffic is typically non-uniform, such as the case where there is more traffic during the day and relatively little during the night, then the configuration should be set accordingly. To take advantage of known traffic patterns, in this case, you might set a CPU or cheaper GPU instance as the standby instance, and dedicate a powerful GPU for the cooling instance. In this approach, the powerful cooling instance would efficiently handle intensive traffic during the day and the standby instance would save you on costs because it is running at night. Importantly, this balance maintains the near real-time performance.</p>
 <h3 id='configure-for-high-traffic'>Configure for high traffic</h3>
-<p>On the other hand, if your site traffic is more uniform or people just never stop using it, it is more recommended to only use standby instances with the powerful GPU. Why is that? if you kept the previous configuration which uses a weak standby and a powerful cooling, the cooling instance may just never end its cooling period since there are always requests coming. In this case, the weak standby instance is not applied at all and is wasted.</p>
+<p>On the other hand, some sites have traffic that is uniform. Constant traffic is common, for example, in applications that are depended on by clients operating in many different time zones. If your site traffic is more uniform, and people never stop using it, using standby instances with a powerful GPU is the recommended configuration.</p>
+
+<p>The reason for this becomes clear when you consider the previous configuration, which uses a weak standby processor and a powerful cooling one. With constant traffic, the cooling instance would never shut down because the timeout period would never expire. Consequently, the lesser-powered standby processor would not be utilized and thus wasted.</p>
 <h3 id='case-study-calculate-the-saving'>Case study: calculate the saving</h3>
 <p><img src="https://drive.google.com/uc?export=view&amp;id=1sLxQ6SZDamjT9qGp2JE7zElUZwIpLQ3I" alt="" /></p>
 
-<p><strong>Graph explanation</strong>: Given that you created an inference job with configuration <code>machine_id_config = {&quot;standby&quot;: &quot;g4dn.4xlarge&quot;, &quot;cooling&quot;: &quot;g4dn.12xlarge.od&quot;}</code>. The inference job was applied from 8:00 am to 11.59 pm. Most inference requests (IRs) were received during the morning and afternoon. Every time an IR was received by the cooling instance, the instance&#39;s cooldown period reset. If the cooldown period passed by without receiving one IR, the cooling instance stopped, and the standby instance handled the next IR. At that time, the standby started invoking back the stopped cooling instance. The standby instance also processed the following IRs until the cooling instance fully woke up. Within the 16 hours, cooling instances were turned on for 6 hours and the standby instance was never turned off. The machine pricing is shown below:</p>
+<p><strong>Graph explanation</strong>: This graph describes an inference job with configuration <code>machine_id_config = machine_id_config = {&quot;standby&quot;: &quot;g4dn.4xlarge&quot;, &quot;cooling&quot;: &quot;g4dn.12xlarge.od&quot;}</code>. The job was operated between 8:00 am and 11.59 pm, and it is clear that most of the inference requests (IRs) were received during the morning and afternoon.</p>
+
+<p>Every time an IR was received by the cooling instance, the cooldown period reset. If the cooldown period passed by without receiving an IR, the instance stopped, and the standby instance handled the next IR. At that time, the standby invoked the previously stopped cooling instance. During the period it took the cooling instance to fully come online, the standby instance processed the IRs.</p>
+
+<p>Over the course of the 16 hours, cooling instances were turned on for 6 hours and the standby instance was never turned off. The relevant machine pricing is shown below:</p>
 
 <table><thead>
 <tr>
@@ -964,7 +979,7 @@ The access token used in <a href="#authentication">authentication</a>. If its va
 </tr>
 </tbody></table>
 
-<p>Let&#39;s compare the saving with and without standby&amp;cooling configuration.</p>
+<p><strong>Let&#39;s compare the savings with and without the hybrid configuration.</strong></p>
 
 <table><thead>
 <tr>
@@ -988,9 +1003,9 @@ The access token used in <a href="#authentication">authentication</a>. If its va
 </tr>
 </tbody></table>
 
-<p>In this scenario, the pure saving from standby&amp;cooling configuration was over 30%. Plus, if their spot instances were available over the period, AIbro would end up cutting the cost from $62.56 to $15.42. That was a 75% saving!</p>
+<p>In this scenario, the savings from using the hybrid standby and cooling configuration was more than 30%. Furthermore, if spot instances were available over the period, Albro would further cut the cost from $62.56 to $15.42. This is a savings of more than 75%!</p>
 <h2 id='inference-job-amp-instance-status'>Inference Job &amp; Instance Status</h2>
-<p>Once a job starts, its states and substates are updated on the <a href="https://aipaca.ai/inference_jobs">Jobs page of AIbro Console</a>.</p>
+<p>Once a job starts, its states and substates are updated on the <a href="https://aipaca.ai/inference_jobs">Jobs page within the Aibro Console</a>.</p>
 
 <table><thead>
 <tr>
@@ -1044,7 +1059,7 @@ The access token used in <a href="#authentication">authentication</a>. If its va
 </tr>
 <tr>
 <td>CANCELED</td>
-<td>Canceled due to some errors</td>
+<td>Canceled due to errors</td>
 </tr>
 <tr>
 <td>COMPLETED</td>
@@ -1064,7 +1079,7 @@ The access token used in <a href="#authentication">authentication</a>. If its va
 </tr>
 <tr>
 <td>EXECUTING</td>
-<td>Having jobs in ready to receive inference requests</td>
+<td>Jobs being processed and ready to receive requests</td>
 </tr>
 <tr>
 <td>COOLING</td>
@@ -1076,7 +1091,7 @@ The access token used in <a href="#authentication">authentication</a>. If its va
 </tr>
 <tr>
 <td>CLOSED</td>
-<td>instance has been stopped/terminated</td>
+<td>Instance has been stopped/terminated</td>
 </tr>
 </tbody></table>
 
@@ -1162,36 +1177,33 @@ The access token used in <a href="#authentication">authentication</a>. If its va
 </tr>
 </tbody></table>
 <h1 id='cloud-instance'>Cloud Instance</h1>
-<p>We will use the word &quot;machine&quot; and &quot;server&quot; interchangeably with &quot;instance&quot; in the following content.</p>
+<p>The words &quot;machine&quot;, &quot;server&quot;, and “instance” are used interchangeably in the following content.</p>
 <h2 id='spot-vs-on-demand-instance'>Spot Vs On-demand Instance</h2><h3 id='machine-id'>Machine id</h3>
-<p>By simply adding &quot;.od&quot; after machine id to convert instance type from spot to on-demand (e.g. <em>p2.xlarge</em> is spot and <em>p2.xlarge.od</em> is on-demand).</p>
+<p>By simply adding <code>&quot;.od&quot;</code> after the machine ID, it is converted from a spot instance to an on-demand instance (e.g. <em>p2.xlarge</em> is spot and <em>p2.xlarge.od</em> is on-demand).</p>
 <h3 id='pricing'>Pricing</h3>
 <p>Spot instances are usually 70% cheaper than their corresponding on-demand instances.</p>
 
 <p><img src="https://drive.google.com/uc?export=view&amp;id=1G6fVuxUu8Yofj_SBxl57m_lFZ83L4MzE" alt="" />
 <img src="https://drive.google.com/uc?export=view&amp;id=1vomqhv0C7-ZjmwZ62dv3bjFJZtL2-wiT" alt="" /></p>
 <h3 id='availability'>Availability</h3>
-<p>As a tradeoff, spot instance requests are not always fulfilled. We defined the term <strong>&quot;availability&quot;</strong> as the success probability of
-instance request.</p>
+<p>As a tradeoff, spot instance requests are not always fulfilled. We define <strong>&quot;availability&quot;</strong> as the success probability of an instance request.</p>
 
-<p>Clearly, the availabilities of on-demand instances are always 100%. Therefore, it is guaranteed to get an on-demand instance as long as there is enough capacity in the AIbro marketplace. With a small possibility, AWS can run out of capacity itself, but it is not detectable until the request error occurs in jobs.</p>
+<p>Clearly, the availability of on-demand instances is always 100%. Provided there is sufficient capacity in the Aibro marketplace, an on-demand instance is guaranteed. There is a small chance that AWS will reach capacity and create a bottleneck, although this cannot be detected until the request encounters an error during a job.</p>
 
-<p>The availabilities of spot instances is varied by instance types and request time. In general, we found more powerful
-instance types have less availability (e.g. p3.2xlarge is less available than p2.xlarge). Meanwhile, spot instances are
-usually more available during non-working hours.</p>
+<p>The availability of spot instances is varied by instance type and request time. We have found that in general, the more powerful instance types have less availability (e.g. p3.2xlarge is less available than p2.xlarge). Not surprisingly, we have also found that spot instances are more often available during non-business hours.</p>
 <h3 id='reliability'>Reliability</h3>
-<p>Spot instances have a chance to be interrupted by AWS. On-demand instances are always stable.</p>
+<p>When choosing a configuration, it is relevant that spot instances can be interrupted by AWS, whereas on-demand instances are always stable.</p>
 <h1 id='contact-us'>Contact Us</h1>
-<p>You could reach out to us in one of the following ways:</p>
+<p>If you have comments, questions, or concerns then please reach out to us in one of the following ways:</p>
 
 <ol>
-<li><strong>Most recommend</strong>: <a href="https://discord.gg/kEdtjUYb">Discord Community</a> to direct message our support team</li>
-<li>Use the &quot;Contact Us&quot; button from our <a href="https://aipaca.ai">website</a></li>
-<li>Send message by <a href="#send_message"><code>aibro.Comm.send_message()</code></a></li>
+<li><strong>Recommended</strong>: We are available through the <a href="https://discord.gg/kEdtjUYb">Discord Community</a> and you can direct message our support team.</li>
+<li>Use the &quot;Contact Us&quot; button on our <a href="https://aipaca.ai">website</a></li>
+<li>Send us a message using the <a href="#send_message"><code>aibro.comm.Comm.send_message()</code></a></li>
 <li>Email us at <a href = "mailto: hello@aipaca.ai">hello@aipaca.ai</a></li>
 </ol>
 <h1 id='data-privacy'>Data Privacy</h1>
-<p>AIbro inference only stores the metadata from inference requests for service improvement purposes.</p>
+<p>Each Albro inference stores only the metadata from inference requests. This is done for the purpose of service improvement.</p>
 
       </div>
       <div class="dark-box">
