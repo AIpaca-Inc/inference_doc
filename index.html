@@ -591,14 +591,14 @@ This endpoint deletes a specific kitten.
 <p>The first step in the process is training a machine learning model, whereas this document focuses on the second step, cloud-based machine learning inference. If you are also interested in learning about training a model, please refer to the <a href="https://doc.aipaca.ai/training">training document</a>.</p>
 <h2 id='why-aibro-inference'>Why AIbro Inference?</h2>
 <ul>
-<li>Cost-effectiveness. Compared to ordinary on-demand instances, Albro uses <a href="#spot-vs-on-demand-instance">spot</a> and <a href="#standby-and-cooling-instances">standby</a> instances to achieve 85% savings.</li>
+<li>Cost-effectiveness. Compared to ordinary on-demand instances, Aibro uses <a href="#spot-vs-on-demand-instance">spot</a> and <a href="#standby-and-cooling-instances">standby</a> instances to achieve 85% savings.</li>
 <li>Ease of use. Aibro is easy to use and it only takes two minutes to deploy a machine learning model.</li>
 <li>Flexibility. Our platform supports virtually all of the popular model frameworks in the market.</li>
 </ul>
 <h1 id='authentication'>Authentication</h1>
 <p>Authentication is required when Aibro APIs are called for the first time.</p>
 
-<p>Albro allows one of the following two ways to authenticate:</p>
+<p>Aibro allows one of the following two ways to authenticate:</p>
 
 <ul>
 <li>Access token (<strong>recommended</strong>): This is supplied using a series of characters prefixed by &quot;secret_...&quot;, and can be found in the Aibro Console on the <a href="https://aipaca.ai/humming">humming page</a>.</li>
@@ -828,7 +828,7 @@ This parameter specifies the machine configuration to be used to deploy the mode
 <aside class="notice">
 <span style="font-weight: bold">FAQ: Why does `machine_id_config` only accept on-demand instances? Isn't it more expensive than using a spot instance?</span> <br/>
 
-Answer: Spot instances are not always available, so on-demand instances are required in order to guarantee that the job can always get a server. If spot instances are available, Albro automatically replaces its same-type on-demand instances to operate more cost-effectively.
+Answer: Spot instances are not always available, so on-demand instances are required in order to guarantee that the job can always get a server. If spot instances are available, Aibro automatically replaces its same-type on-demand instances to operate more cost-effectively.
 
 </aside>
 
@@ -1003,7 +1003,7 @@ The access token is used to <a href="#authentication">authenticate</a> the API r
 </tr>
 </tbody></table>
 
-<p>In this scenario, the savings from using the hybrid standby and cooling configuration was more than 30%. Furthermore, if spot instances were available over the period, Albro would further cut the cost from $62.56 to $15.42. This is a savings of more than 75%!</p>
+<p>In this scenario, the savings from using the hybrid standby and cooling configuration was more than 30%. Furthermore, if spot instances were available over the period, Aibro would further cut the cost from $62.56 to $15.42. This is a savings of more than 75%!</p>
 <h2 id='inference-job-amp-instance-status'>Inference Job &amp; Instance Status</h2>
 <p>Once a job starts, its states and substates are updated on the <a href="https://aipaca.ai/inference_jobs">Jobs page within the Aibro Console</a>.</p>
 
@@ -1203,7 +1203,7 @@ The access token is used to <a href="#authentication">authenticate</a> the API r
 <li>Email us at <a href = "mailto: hello@aipaca.ai">hello@aipaca.ai</a></li>
 </ol>
 <h1 id='data-privacy'>Data Privacy</h1>
-<p>Each Albro inference stores only the metadata from inference requests. This is done for the purpose of service improvement.</p>
+<p>Each Aibro inference stores only the metadata from inference requests. This is done for the purpose of service improvement.</p>
 
       </div>
       <div class="dark-box">
