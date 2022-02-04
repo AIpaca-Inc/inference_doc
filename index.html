@@ -355,7 +355,7 @@
                     <a href="#step-3-test-the-repo-using-dryrun" class="toc-h2 toc-link" data-title="Step 3: Test the Repo using Dryrun">Step 3: Test the Repo using Dryrun</a>
                   </li>
                   <li>
-                    <a href="#step-4-create-an-inference-api-with-one-line-code" class="toc-h2 toc-link" data-title="Step 4: Create an inference API with one-line code">Step 4: Create an inference API with one-line code</a>
+                    <a href="#step-4-create-an-inference-api-with-one-line-of-code" class="toc-h2 toc-link" data-title="Step 4: Create an inference API with one line of code">Step 4: Create an inference API with one line of code</a>
                   </li>
                   <li>
                     <a href="#step-5-test-an-aibro-api-with-curl" class="toc-h2 toc-link" data-title="Step 5: Test an Aibro API with curl:">Step 5: Test an Aibro API with curl:</a>
@@ -601,7 +601,7 @@ This endpoint deletes a specific kitten.
 <p>Albro allows one of the following two ways to authenticate:</p>
 
 <ul>
-<li>Access token (<strong>recommend</strong>): This is supplied using a series of characters prefixed by &quot;secret_...&quot;, and can be found in the Aibro Console on the <a href="https://aipaca.ai/humming">humming page</a>.</li>
+<li>Access token (<strong>recommended</strong>): This is supplied using a series of characters prefixed by &quot;secret_...&quot;, and can be found in the Aibro Console on the <a href="https://aipaca.ai/humming">humming page</a>.</li>
 <li>Email &amp; password: These credentials are the same that were used to register on the <a href="https://aipaca.ai">AIbro website</a>.</li>
 </ul>
 
@@ -666,7 +666,7 @@ Play around with the executable Colab tutorial <a href = "https://colab.research
 <span class="p">)</span>
 </code></pre></div>
 <p>Dryrun locally validates the repo structure and tests to ensure that an inference result can be successfully returned.</p>
-<h2 id='step-4-create-an-inference-api-with-one-line-code'>Step 4: Create an inference API with one-line code</h2><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">aibro.inference</span> <span class="kn">import</span> <span class="n">Inference</span>
+<h2 id='step-4-create-an-inference-api-with-one-line-of-code'>Step 4: Create an inference API with one line of code</h2><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">aibro.inference</span> <span class="kn">import</span> <span class="n">Inference</span>
 <span class="n">api_url</span> <span class="o">=</span> <span class="n">Inference</span><span class="p">.</span><span class="n">deploy</span><span class="p">(</span>
     <span class="n">model_name</span> <span class="o">=</span> <span class="s">"my_fancy_transformer"</span><span class="p">,</span>
     <span class="n">machine_id_config</span> <span class="o">=</span> <span class="s">"c5.large.od"</span><span class="p">,</span>
@@ -790,7 +790,7 @@ This parameter specifies the machine configuration to be used to deploy the mode
 <li>A <strong>Cooling</strong> instance is one that only turns on when it receives a new inference request, and only turns off when no inference request is received within <code>cool_down_period_s</code> seconds.</li>
 </ul>
 
-<p>The macine_id_config can be set to <code>None</code> if and only <code>dryrun</code> is set to <code>False</code>. The input type can be either a string or a dictionary:</p>
+<p>The machine_id_config can be set to <code>None</code> if and only if <code>dryrun</code> is set to <code>False</code>. The input type can be either a string or a dictionary:</p>
 
 <table><thead>
 <tr>
@@ -819,7 +819,7 @@ This parameter specifies the machine configuration to be used to deploy the mode
 <p><u>Important:</u></p>
 
 <ol>
-<li><u>The machine id has to be on-demand (ends by <code>.od</code>).</u></li>
+<li><u>The machine id has to be on-demand (ends with <code>.od</code>).</u></li>
 <li><u>One standby instance is mandatory whereas cooling instance is optional (e.g. syntax such as {&quot;cooling&quot;: &quot;g4dn.4xlarge.od&quot;} is invalid).</u></li>
 </ol>
 
